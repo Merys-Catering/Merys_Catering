@@ -15,12 +15,12 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="icon" type="image/png" href="img/01_icono_pagina_web.png">
 <link rel="apple-touch-icon" href="img/01_icono_pagina_web.png">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{--navy:#001e53;--navy-2:#0b2f6b;--rojo:#b90000;--rojo-2:#950000;--mist:#eef4fc;--muted:#5b667a}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:Poppins,system-ui,sans-serif;color:var(--navy);line-height:1.6;background:#fff}
+body{font-family:Nunito,system-ui,sans-serif;color:var(--navy);line-height:1.6;background:#fff}
 img{max-width:100%}
 a{color:inherit}
 button{font:inherit;cursor:pointer}
@@ -30,8 +30,7 @@ section{padding:4.5rem 6vw}
 
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;background:var(--rojo);color:#fff;font-weight:600;border:0;border-radius:999px;padding:.8rem 1.5rem;text-decoration:none;transition:background .2s}
 .btn:hover{background:var(--rojo-2)}
-.title{display:flex;align-items:center;justify-content:center;gap:1.2rem;text-align:center;font-family:"Playfair Display",Georgia,serif;font-size:clamp(1.7rem,3.4vw,2.4rem);font-weight:600}
-.lines::before,.lines::after{content:"";flex:1;max-width:200px;height:2px;background:var(--rojo)}
+.title{text-align:center;font-size:clamp(1.9rem,3.6vw,2.5rem);font-weight:800;line-height:1.2;color:var(--navy)}
 .sub{text-align:center;color:var(--muted);margin-top:.3rem}
 
 /* Encabezado */
@@ -54,26 +53,30 @@ nav a:hover{color:var(--rojo)}
 .next{right:1.2rem}
 
 /* Servicios */
-.servicios{display:grid;grid-template-columns:repeat(5,1fr);text-align:center;margin-top:2.6rem}
-.servicio{padding:0 1rem}
-.servicio+.servicio{border-left:1px solid #c9d6ea}
-.servicio span{display:grid;place-items:center;width:84px;height:84px;margin:0 auto 1rem;border:2px solid var(--navy);border-radius:50%;font-size:2.1rem}
-.servicio h3{font-size:1rem;font-weight:600;line-height:1.35}
+#servicios{background:var(--mist)}
+.servicios{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;margin-top:2.6rem}
+.servicio{background:#fff;border-top:4px solid var(--rojo);border-radius:14px;padding:2rem 1.4rem;text-align:center;box-shadow:0 4px 14px rgba(0,30,83,.06)}
+.servicio span{display:block;font-size:2.6rem;line-height:1;margin-bottom:1rem}
+.servicio h3{font-size:1.1rem;font-weight:700;color:var(--navy);margin-bottom:.5rem}
+.servicio p{font-size:.92rem;color:var(--muted);line-height:1.5}
 
 /* Galería */
-.galeria{background:var(--mist)}
-.carrusel{position:relative;margin-top:2rem}
-.track{display:flex;gap:1rem;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding:0 4.5rem}
-.track::-webkit-scrollbar{display:none}
-.track figure{position:relative;flex:0 0 min(300px,70vw);aspect-ratio:4/3;border-radius:12px;overflow:hidden;scroll-snap-align:start;background:var(--navy-2) center/cover no-repeat;margin:0}
-.track figcaption{position:absolute;left:0;right:0;bottom:0;padding:2.5rem 1rem .8rem;background:linear-gradient(transparent,rgba(11,22,40,.85));color:#fff;font-weight:600;font-size:.95rem;text-align:left}
-.galeria .arrow{background:var(--navy)}
+#galeria{background:var(--mist)}
+.carrusel{position:relative;max-width:1150px;height:clamp(240px,38vw,400px);margin:2.4rem auto 0;border-radius:16px;overflow:hidden;background:var(--navy-2)}
+.slides{display:flex;height:100%;transition:transform .6s ease}
+.foto{flex:0 0 100%;height:100%;margin:0;position:relative;background:var(--navy-2) center/cover no-repeat}
+.foto span{position:absolute;left:1.2rem;bottom:1.2rem;padding:.4rem .9rem;border-radius:8px;background:rgba(11,22,40,.85);color:#fff;font-weight:800;font-size:1.1rem}
+.carrusel .arrow{width:44px;height:44px;border:0;background:rgba(11,22,40,.8);font-size:1.6rem}
+.dots{position:absolute;bottom:1.1rem;left:50%;transform:translateX(-50%);display:flex;gap:.55rem;z-index:2}
+.dots button{width:12px;height:12px;border-radius:50%;border:2px solid #fff;background:transparent;padding:0;cursor:pointer}
+.dots .on{background:var(--rojo);border-color:var(--rojo)}
 
 /* Nosotros y testimonios */
 .nosotros p{max-width:700px;margin:1.6rem auto 0;text-align:center;color:#333;font-size:1.05rem}
-.testis{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.2rem;margin-top:2.2rem}
-.testis blockquote{background:var(--mist);border-left:4px solid var(--rojo);border-radius:12px;padding:1.4rem 1.5rem;font-style:italic;color:#333}
-.testis cite{display:block;margin-top:.8rem;font-style:normal;font-weight:600;color:var(--navy);font-size:.9rem}
+#testimonios{background:#faf8f5}
+.testis{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.4rem;margin:2.4rem auto 0;max-width:1100px}
+.testis blockquote{background:#fff;border-top:4px solid var(--rojo);border-radius:14px;padding:1.8rem 1.5rem;text-align:center;font-style:italic;color:var(--navy);box-shadow:0 4px 14px rgba(0,30,83,.06)}
+.testis cite{display:block;margin-top:1rem;font-style:normal;font-weight:800;color:var(--navy);font-size:.95rem}
 
 /* Beneficios y pie */
 .pie{background:var(--navy);color:#fff;padding:2.4rem 6vw 1.6rem}
@@ -94,7 +97,7 @@ nav a:hover{color:var(--rojo)}
 dialog{border:0;border-radius:16px;padding:0;width:min(560px,92vw);color:var(--navy)}
 dialog::backdrop{background:rgba(11,22,40,.7)}
 #form{padding:1.8rem;display:grid;grid-template-columns:1fr 1fr;gap:.9rem 1rem}
-#form h2{grid-column:1/-1;font-family:"Playfair Display",Georgia,serif;font-size:1.5rem}
+#form h2{grid-column:1/-1;font-size:1.5rem}
 #form label{display:grid;gap:.35rem;font-size:.85rem;font-weight:600}
 #form .full{grid-column:1/-1}
 #form input,#form select,#form textarea{font:inherit;font-weight:400;font-size:.95rem;padding:.6rem .75rem;border:1px solid #c9cfdc;border-radius:8px;background:#fff;color:var(--navy)}
@@ -120,6 +123,7 @@ dialog::backdrop{background:rgba(11,22,40,.7)}
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
 }
+@media(max-width:560px){.servicios{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -147,28 +151,36 @@ dialog::backdrop{background:rgba(11,22,40,.7)}
 </div>
 
 <section id="servicios">
-  <h2 class="title lines">Nuestros Servicios</h2>
+  <h2 class="title">Nuestros servicios</h2>
+  <p class="sub">Un evento para cada ocasión.</p>
   <div class="servicios">
-    <div class="servicio"><span>🥂</span><h3>Pasadías y Celebraciones</h3></div>
-    <div class="servicio"><span>🎂</span><h3>Cumpleaños y Aniversarios</h3></div>
-    <div class="servicio"><span>💼</span><h3>Eventos corporativos y empresariales</h3></div>
-    <div class="servicio"><span>💍</span><h3>Bodas y Eventos Sociales</h3></div>
-    <div class="servicio"><span>🎈</span><h3>Decoración y Ambientación</h3></div>
+    <div class="servicio"><span>🥂</span><h3>Pasadías y celebraciones</h3><p>Jornadas de recreación y descanso con todo organizado.</p></div>
+    <div class="servicio"><span>🎂</span><h3>Cumpleaños</h3><p>Fiestas para todas las edades, con la temática que elijas.</p></div>
+    <div class="servicio"><span>💍</span><h3>Aniversarios</h3><p>Celebra cada año juntos con una velada especial.</p></div>
+    <div class="servicio"><span>💼</span><h3>Eventos empresariales</h3><p>Reuniones, lanzamientos y celebraciones de equipo.</p></div>
+    <div class="servicio"><span>👰</span><h3>Bodas y eventos sociales</h3><p>Tu boda o gran celebración, de principio a fin.</p></div>
+    <div class="servicio"><span>🎈</span><h3>Decoración y ambientación</h3><p>Montajes, iluminación y detalles que transforman el lugar.</p></div>
   </div>
 </section>
 
-<section id="galeria" class="galeria">
-  <h2 class="title">Galería de Nuestros Eventos</h2>
-  <p class="sub">Disfruta algunos momentos de nuestras celebraciones</p>
+<section id="galeria">
+  <h2 class="title">Galería de nuestros eventos</h2>
+  <p class="sub">Celebraciones realizadas con nuestros clientes.</p>
   <div class="carrusel">
-    <button class="arrow prev" id="gal-prev" aria-label="Anterior">‹</button>
-    <div class="track" id="track">
-      <figure style="background-image:url('img/galeria-1.jpg')" role="img" aria-label="Decoración de cumpleaños"><figcaption>Feliz Cumpleaños</figcaption></figure>
-      <figure style="background-image:url('img/galeria-2.jpg')" role="img" aria-label="Celebración al aire libre"><figcaption>Celebración al aire libre</figcaption></figure>
-      <figure style="background-image:url('img/galeria-3.jpg')" role="img" aria-label="Mesa de pasadía con globos"><figcaption>Mi Pasadita</figcaption></figure>
-      <figure style="background-image:url('img/galeria-4.jpg')" role="img" aria-label="Carpa iluminada"><figcaption>Carpa iluminada</figcaption></figure>
+    <div class="slides" id="slides">
+      <figure class="foto" role="img" aria-label="Decoración de cumpleaños" style="background-image:url('img/galeria-1.jpg')"><span>Feliz Cumpleaños</span></figure>
+      <figure class="foto" role="img" aria-label="Celebración al aire libre" style="background-image:url('img/galeria-2.jpg')"><span>Celebración al aire libre</span></figure>
+      <figure class="foto" role="img" aria-label="Mesa de pasadía con globos" style="background-image:url('img/galeria-3.jpg')"><span>Mi Pasadita</span></figure>
+      <figure class="foto" role="img" aria-label="Carpa iluminada" style="background-image:url('img/galeria-4.jpg')"><span>Carpa iluminada</span></figure>
     </div>
+    <button class="arrow prev" id="gal-prev" aria-label="Anterior">‹</button>
     <button class="arrow next" id="gal-next" aria-label="Siguiente">›</button>
+    <div class="dots" id="gal-dots">
+      <button class="on" aria-label="Foto 1"></button>
+      <button aria-label="Foto 2"></button>
+      <button aria-label="Foto 3"></button>
+      <button aria-label="Foto 4"></button>
+    </div>
   </div>
 </section>
 
@@ -179,6 +191,7 @@ dialog::backdrop{background:rgba(11,22,40,.7)}
 
 <section id="testimonios">
   <h2 class="title">Testimonios</h2>
+  <p class="sub">Lo que dicen nuestros clientes.</p>
   <!-- Reemplazar por testimonios reales de clientes -->
   <div class="testis">
     <blockquote>“Todo quedó perfecto para el cumpleaños de mi hija. Atención excelente.”<cite>Cliente, cumpleaños</cite></blockquote>
@@ -253,10 +266,21 @@ $$('[data-mail]').forEach(a => { a.textContent = CONFIG.correo; a.href = 'mailto
 $$('[data-wa]').forEach(a => a.href = `https://wa.me/${CONFIG.whatsapp}`);
 
 // Galería
-const track = $('#track');
-const mover = dir => track.scrollBy({ left: dir * track.clientWidth * .8, behavior: 'smooth' });
-$('#gal-prev').onclick = () => mover(-1);
-$('#gal-next').onclick = () => mover(1);
+const slidesEl = $('#slides'), fotos = $$('.foto'), gdots = $$('#gal-dots button');
+let g = 0, gTimer;
+function irFoto(n) {
+  g = (n + fotos.length) % fotos.length;
+  slidesEl.style.transform = `translateX(-${g * 100}%)`;
+  gdots.forEach((d, k) => d.classList.toggle('on', k === g));
+}
+function autoGaleria() {
+  clearInterval(gTimer);
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) gTimer = setInterval(() => irFoto(g + 1), 6000);
+}
+$('#gal-prev').onclick = () => { irFoto(g - 1); autoGaleria(); };
+$('#gal-next').onclick = () => { irFoto(g + 1); autoGaleria(); };
+gdots.forEach((d, k) => d.onclick = () => { irFoto(k); autoGaleria(); });
+autoGaleria();
 
 // Menú móvil
 const nav = $('#nav');
@@ -308,3 +332,4 @@ form.onsubmit = async e => {
 </script>
 </body>
 </html>
+
