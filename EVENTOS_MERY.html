@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<!--
+  MERY'S CATERING - página principal (GitHub Pages)
+  1) Edita el bloque CONFIG de abajo (WhatsApp, teléfono, correo).
+  2) Pon las fotos en la carpeta img/ con estos nombres:
+     01_icono_pagina_web.png, 02_logo_principal.png, 03_fondo_pagina_web.png, galeria-1.jpg a galeria-4.jpg
+-->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mery's Catering | Sabor, calidad y servicio en cada detalle</title>
+<meta name="description" content="Catering y servicios para pasadías, cumpleaños, aniversarios, eventos corporativos, bodas y decoración. Cotiza con Mery's Catering.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="icon" type="image/png" href="img/01_icono_pagina_web.png">
+<link rel="apple-touch-icon" href="img/01_icono_pagina_web.png">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#001e53;--navy-2:#0b2f6b;--rojo:#b90000;--rojo-2:#950000;--mist:#eef4fc;--muted:#5b667a}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Poppins,system-ui,sans-serif;color:var(--navy);line-height:1.6;background:#fff}
+img{max-width:100%}
+a{color:inherit}
+button{font:inherit;cursor:pointer}
+section,footer{scroll-margin-top:80px}
+section{padding:4.5rem 6vw}
+:focus-visible{outline:3px solid var(--rojo);outline-offset:3px}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;background:var(--rojo);color:#fff;font-weight:600;border:0;border-radius:999px;padding:.8rem 1.5rem;text-decoration:none;transition:background .2s}
+.btn:hover{background:var(--rojo-2)}
+.title{display:flex;align-items:center;justify-content:center;gap:1.2rem;text-align:center;font-family:"Playfair Display",Georgia,serif;font-size:clamp(1.7rem,3.4vw,2.4rem);font-weight:600}
+.lines::before,.lines::after{content:"";flex:1;max-width:200px;height:2px;background:var(--rojo)}
+.sub{text-align:center;color:var(--muted);margin-top:.3rem}
+
+/* Encabezado */
+header{position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:1.4rem;padding:.5rem 4vw;background:#fff;color:var(--navy);border-bottom:4px solid var(--rojo)}
+.logo{display:flex;align-items:center;gap:.7rem;text-decoration:none}
+.logo img{height:64px;width:auto}
+nav{margin-left:auto;display:flex;gap:1.2rem;font-size:.9rem;font-weight:500}
+nav a{text-decoration:none}
+nav a:hover{color:var(--rojo)}
+.cta{padding:.6rem 1.1rem;font-size:.9rem}
+.menu{display:none;margin-left:.6rem;background:none;border:0;color:var(--navy);font-size:1.7rem}
+
+/* Banner y botones */
+.banner img{display:block;width:100%;height:auto}
+.cta-bar{display:flex;flex-wrap:wrap;justify-content:center;gap:1rem;padding:2rem 6vw}
+.btn-outline{background:#fff;color:var(--navy);border:2px solid var(--navy)}
+.btn-outline:hover{background:var(--mist)}
+.arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:2;width:46px;height:46px;border-radius:50%;border:2px solid #fff;background:rgba(11,22,40,.55);color:#fff;font-size:1.8rem;line-height:1;display:grid;place-items:center}
+.prev{left:1.2rem}
+.next{right:1.2rem}
+
+/* Servicios */
+.servicios{display:grid;grid-template-columns:repeat(5,1fr);text-align:center;margin-top:2.6rem}
+.servicio{padding:0 1rem}
+.servicio+.servicio{border-left:1px solid #c9d6ea}
+.servicio span{display:grid;place-items:center;width:84px;height:84px;margin:0 auto 1rem;border:2px solid var(--navy);border-radius:50%;font-size:2.1rem}
+.servicio h3{font-size:1rem;font-weight:600;line-height:1.35}
+
+/* Galería */
+.galeria{background:var(--mist)}
+.carrusel{position:relative;margin-top:2rem}
+.track{display:flex;gap:1rem;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding:0 4.5rem}
+.track::-webkit-scrollbar{display:none}
+.track figure{position:relative;flex:0 0 min(300px,70vw);aspect-ratio:4/3;border-radius:12px;overflow:hidden;scroll-snap-align:start;background:var(--navy-2) center/cover no-repeat;margin:0}
+.track figcaption{position:absolute;left:0;right:0;bottom:0;padding:2.5rem 1rem .8rem;background:linear-gradient(transparent,rgba(11,22,40,.85));color:#fff;font-weight:600;font-size:.95rem;text-align:left}
+.galeria .arrow{background:var(--navy)}
+
+/* Nosotros y testimonios */
+.nosotros p{max-width:700px;margin:1.6rem auto 0;text-align:center;color:#333;font-size:1.05rem}
+.testis{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.2rem;margin-top:2.2rem}
+.testis blockquote{background:var(--mist);border-left:4px solid var(--rojo);border-radius:12px;padding:1.4rem 1.5rem;font-style:italic;color:#333}
+.testis cite{display:block;margin-top:.8rem;font-style:normal;font-weight:600;color:var(--navy);font-size:.9rem}
+
+/* Beneficios y pie */
+.pie{background:var(--navy);color:#fff;padding:2.4rem 6vw 1.6rem}
+.beneficios{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1.5rem 2rem}
+.beneficios div{display:flex;align-items:center;gap:.7rem;max-width:230px;font-size:.95rem}
+.beneficios i{font-style:normal;font-size:1.9rem}
+.contacto{margin-top:2rem;padding-top:1.4rem;border-top:1px solid rgba(255,255,255,.14);display:flex;flex-wrap:wrap;justify-content:space-between;gap:.8rem 2rem;font-size:.9rem}
+.contacto a{text-decoration:none}
+.contacto a:hover{text-decoration:underline}
+.pie .btn{background:#fff;color:var(--navy)}
+.pie .btn:hover{background:var(--mist)}
+
+/* WhatsApp flotante */
+.wa{position:fixed;right:1.2rem;bottom:1.2rem;z-index:60;width:60px;height:60px;border-radius:50%;background:#25d366;color:#fff;display:grid;place-items:center;box-shadow:0 6px 18px rgba(0,0,0,.25)}
+.wa svg{width:32px;height:32px}
+
+/* Ventana de reserva */
+dialog{border:0;border-radius:16px;padding:0;width:min(560px,92vw);color:var(--navy)}
+dialog::backdrop{background:rgba(11,22,40,.7)}
+#form{padding:1.8rem;display:grid;grid-template-columns:1fr 1fr;gap:.9rem 1rem}
+#form h2{grid-column:1/-1;font-family:"Playfair Display",Georgia,serif;font-size:1.5rem}
+#form label{display:grid;gap:.35rem;font-size:.85rem;font-weight:600}
+#form .full{grid-column:1/-1}
+#form input,#form select,#form textarea{font:inherit;font-weight:400;font-size:.95rem;padding:.6rem .75rem;border:1px solid #c9cfdc;border-radius:8px;background:#fff;color:var(--navy)}
+#form input:focus,#form select:focus,#form textarea:focus{outline:2px solid var(--rojo);border-color:transparent}
+#form .link{background:none;border:0;color:var(--muted);text-decoration:underline}
+#msg{min-height:1.4em;font-size:.9rem;color:var(--muted)}
+
+@media(max-width:1000px){
+  nav{display:none}
+  nav.open{display:flex;flex-direction:column;gap:.9rem;position:absolute;top:100%;left:0;right:0;padding:1rem 6vw;background:#fff;box-shadow:0 10px 20px rgba(0,30,83,.12)}
+  .cta{margin-left:auto}
+  .menu{display:block}
+  .logo img{height:52px}
+}
+@media(max-width:900px){
+  .servicios{grid-template-columns:repeat(2,1fr);gap:2rem 0}
+  .servicio+.servicio{border:0}
+}
+@media(max-width:560px){
+  #form{grid-template-columns:1fr}
+  .track{padding:0 3.2rem}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="#inicio" aria-label="Mery's Catering, ir al inicio"><img src="img/02_logo_principal.png" alt="Mery's Catering"></a>
+  <nav id="nav">
+    <a href="#inicio">Inicio</a>
+    <a href="#nosotros">Nosotros</a>
+    <a href="#servicios">Servicios</a>
+    <a href="#galeria">Galería</a>
+    <a href="#testimonios">Testimonios</a>
+    <a href="#contacto">Contacto</a>
+  </nav>
+  <button class="btn cta" data-reserva>Reserva tu Evento</button>
+  <button class="menu" id="menu" aria-label="Abrir menú">☰</button>
+</header>
+
+<div class="banner">
+  <img src="img/03_fondo_pagina_web.png" alt="Mery's Catering: sabor, calidad y servicio en cada detalle">
+</div>
+<div class="cta-bar">
+  <button class="btn" data-reserva>Cotiza tu evento</button>
+  <a class="btn btn-outline" data-wa target="_blank" rel="noopener">Escríbenos por WhatsApp</a>
+</div>
+
+<section id="servicios">
+  <h2 class="title lines">Nuestros Servicios</h2>
+  <div class="servicios">
+    <div class="servicio"><span>🥂</span><h3>Pasadías y Celebraciones</h3></div>
+    <div class="servicio"><span>🎂</span><h3>Cumpleaños y Aniversarios</h3></div>
+    <div class="servicio"><span>💼</span><h3>Eventos corporativos y empresariales</h3></div>
+    <div class="servicio"><span>💍</span><h3>Bodas y Eventos Sociales</h3></div>
+    <div class="servicio"><span>🎈</span><h3>Decoración y Ambientación</h3></div>
+  </div>
+</section>
+
+<section id="galeria" class="galeria">
+  <h2 class="title">Galería de Nuestros Eventos</h2>
+  <p class="sub">Disfruta algunos momentos de nuestras celebraciones</p>
+  <div class="carrusel">
+    <button class="arrow prev" id="gal-prev" aria-label="Anterior">‹</button>
+    <div class="track" id="track">
+      <figure style="background-image:url('img/galeria-1.jpg')" role="img" aria-label="Decoración de cumpleaños"><figcaption>Feliz Cumpleaños</figcaption></figure>
+      <figure style="background-image:url('img/galeria-2.jpg')" role="img" aria-label="Celebración al aire libre"><figcaption>Celebración al aire libre</figcaption></figure>
+      <figure style="background-image:url('img/galeria-3.jpg')" role="img" aria-label="Mesa de pasadía con globos"><figcaption>Mi Pasadita</figcaption></figure>
+      <figure style="background-image:url('img/galeria-4.jpg')" role="img" aria-label="Carpa iluminada"><figcaption>Carpa iluminada</figcaption></figure>
+    </div>
+    <button class="arrow next" id="gal-next" aria-label="Siguiente">›</button>
+  </div>
+</section>
+
+<section id="nosotros" class="nosotros">
+  <h2 class="title">Nosotros</h2>
+  <p>En Mery's Catering creamos celebraciones a la medida: desde una pasadía íntima hasta una boda con cientos de invitados. Cuidamos cada detalle para que tú solo tengas que disfrutar.</p>
+</section>
+
+<section id="testimonios">
+  <h2 class="title">Testimonios</h2>
+  <!-- Reemplazar por testimonios reales de clientes -->
+  <div class="testis">
+    <blockquote>“Todo quedó perfecto para el cumpleaños de mi hija. Atención excelente.”<cite>Cliente, cumpleaños</cite></blockquote>
+    <blockquote>“Organizaron nuestro aniversario con mucho detalle y puntualidad.”<cite>Cliente, aniversario</cite></blockquote>
+    <blockquote>“Profesionales de principio a fin para nuestro evento corporativo.”<cite>Cliente, empresa</cite></blockquote>
+  </div>
+</section>
+
+<footer class="pie" id="contacto">
+  <div class="beneficios">
+    <div><i>🤝</i>Compromiso y profesionalismo</div>
+    <div><i>🛡️</i>Eventos seguros y bien organizados</div>
+    <div><i>😊</i>Momentos inolvidables</div>
+    <a class="btn" data-wa target="_blank" rel="noopener">Escríbenos por WhatsApp</a>
+  </div>
+  <div class="contacto">
+    <a data-tel></a>
+    <a data-mail></a>
+    <span>© <span id="anio"></span> Mery's Catering</span>
+  </div>
+</footer>
+
+<a class="wa" data-wa target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+</a>
+
+<dialog id="reserva" aria-labelledby="res-titulo">
+  <form id="form">
+    <h2 id="res-titulo">Reserva tu evento</h2>
+    <label>Nombre completo<input name="nombre" required></label>
+    <label>Correo electrónico<input name="correo" type="email" required></label>
+    <label>Teléfono<input name="telefono" type="tel" required></label>
+    <label>Tipo de evento
+      <select name="tipo" required>
+        <option>Pasadía</option>
+        <option>Cumpleaños</option>
+        <option>Aniversario</option>
+        <option>Corporativo</option>
+        <option>Boda</option>
+        <option>Decoración</option>
+        <option>Comidas y catering</option>
+      </select>
+    </label>
+    <label>Fecha<input name="fecha" type="date" required></label>
+    <label>Invitados<input name="invitados" type="number" min="1" value="10" required></label>
+    <label class="full">Lugar<input name="lugar" placeholder="Ciudad o salón"></label>
+    <label class="full">Mensaje<textarea name="mensaje" rows="3" placeholder="Cuéntanos más sobre tu evento"></textarea></label>
+    <p id="msg" class="full"></p>
+    <button class="btn full" type="submit">Enviar solicitud</button>
+    <button class="link full" type="button" id="cerrar">Cancelar</button>
+  </form>
+</dialog>
+
+<script>
+// ===== CONFIGURACIÓN: edita aquí antes de subir a GitHub =====
+const CONFIG = {
+  whatsapp: '573184896105',        // número con indicativo de país, sin + ni espacios
+  telefono: '+57 318 489 6105',
+  correo: 'helpdesk.col@outlook.com',
+  // Opcional: base de datos Supabase. Si quedan vacíos, la reserva se envía por WhatsApp.
+  supabaseUrl: '',                // ej. https://xxxx.supabase.co
+  supabaseKey: ''                 // clave pública "anon"
+};
+
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+
+// Datos de contacto y año
+$('#anio').textContent = new Date().getFullYear();
+$$('[data-tel]').forEach(a => { a.textContent = CONFIG.telefono; a.href = 'tel:' + CONFIG.telefono.replace(/\s/g, ''); });
+$$('[data-mail]').forEach(a => { a.textContent = CONFIG.correo; a.href = 'mailto:' + CONFIG.correo; });
+$$('[data-wa]').forEach(a => a.href = `https://wa.me/${CONFIG.whatsapp}`);
+
+// Galería
+const track = $('#track');
+const mover = dir => track.scrollBy({ left: dir * track.clientWidth * .8, behavior: 'smooth' });
+$('#gal-prev').onclick = () => mover(-1);
+$('#gal-next').onclick = () => mover(1);
+
+// Menú móvil
+const nav = $('#nav');
+$('#menu').onclick = () => nav.classList.toggle('open');
+$$('#nav a').forEach(a => a.onclick = () => nav.classList.remove('open'));
+
+// Ventana de reserva
+const dlg = $('#reserva'), form = $('#form'), msg = $('#msg');
+$$('[data-reserva]').forEach(b => b.onclick = () => { msg.textContent = ''; dlg.showModal(); });
+$('#cerrar').onclick = () => dlg.close();
+dlg.onclick = e => { if (e.target === dlg) dlg.close(); };
+
+form.onsubmit = async e => {
+  e.preventDefault();
+  const d = Object.fromEntries(new FormData(form));
+  d.invitados = Number(d.invitados);
+
+  // Sin Supabase: se abre WhatsApp con los datos ya escritos
+  if (!CONFIG.supabaseUrl) {
+    const texto = `Hola, quiero reservar un evento:\n• Nombre: ${d.nombre}\n• Tipo: ${d.tipo}\n• Fecha: ${d.fecha}\n• Invitados: ${d.invitados}\n• Lugar: ${d.lugar}\n• Correo: ${d.correo}\n• Teléfono: ${d.telefono}\n${d.mensaje}`;
+    window.open(`https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(texto)}`, '_blank', 'noopener');
+    form.reset();
+    dlg.close();
+    return;
+  }
+
+  // Con Supabase: se guarda la solicitud en la tabla "reservas"
+  msg.textContent = 'Enviando…';
+  try {
+    const r = await fetch(`${CONFIG.supabaseUrl}/rest/v1/reservas`, {
+      method: 'POST',
+      headers: {
+        apikey: CONFIG.supabaseKey,
+        Authorization: `Bearer ${CONFIG.supabaseKey}`,
+        'Content-Type': 'application/json',
+        Prefer: 'return=representation'
+      },
+      body: JSON.stringify(d)
+    });
+    if (!r.ok) throw new Error(r.status);
+    const [fila] = await r.json();
+    const codigo = fila && fila.codigo ? ` Tu código es ${fila.codigo}.` : '';
+    msg.textContent = `¡Solicitud recibida!${codigo} Te escribiremos a ${d.correo}.`;
+    form.reset();
+  } catch {
+    msg.textContent = 'No pudimos enviar la solicitud. Intenta de nuevo o escríbenos por WhatsApp.';
+  }
+};
+</script>
+</body>
+</html>
