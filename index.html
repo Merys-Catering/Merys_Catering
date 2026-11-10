@@ -1,386 +1,429 @@
 <!DOCTYPE html>
+<!--
+  MERY'S CATERING - página principal (GitHub Pages)
+  1) Edita el bloque CONFIG de abajo (WhatsApp, teléfono, correo).
+  2) Pon las fotos en la carpeta img/ con estos nombres:
+     01_icono_pagina_web.png, 02_logo_principal.png, 03_fondo_pagina_web.png, galeria-1.jpg a galeria-4.jpg
+-->
 <html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="noindex, nofollow">
-<title>Panel de reservas | Mery's Catering</title>
+<title>Mery's Catering | Sabor, calidad y servicio en cada detalle</title>
+<meta name="description" content="Catering y servicios para pasadías, cumpleaños, aniversarios, eventos corporativos, bodas y decoración. Cotiza con Mery's Catering.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="icon" type="image/png" href="img/01_icono_pagina_web.png">
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="apple-touch-icon" href="img/01_icono_pagina_web.png">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Yellowtail&display=swap" rel="stylesheet">
 <style>
-:root{--navy:#001e53;--rojo:#b90000;--mist:#eef4fc;--muted:#5b667a;--line:#dfe6f2}
+:root{--navy:#001e53;--navy-2:#0b2f6b;--rojo:#b90000;--rojo-2:#950000;--mist:#eef4fc;--muted:#5b667a}
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Nunito,system-ui,sans-serif;color:var(--navy);background:var(--mist);font-size:15px;line-height:1.45}
-button,input,select,textarea{font:inherit}
-button{cursor:pointer}
-.hidden{display:none!important}
-:focus-visible{outline:3px solid var(--rojo);outline-offset:2px}
-header{display:flex;align-items:center;gap:1rem;padding:.6rem 1.4rem;background:#fff;border-bottom:4px solid var(--rojo)}
-header img{height:46px}
-header h1{font-size:1.15rem;font-weight:800}
-header .espacio{flex:1}
-.salir{background:none;border:1px solid var(--line);border-radius:8px;padding:.4rem .9rem;color:var(--navy)}
-.card{background:#fff;border-radius:14px;padding:1.2rem;box-shadow:0 4px 14px rgba(0,30,83,.06)}
-.card h2{font-size:1.05rem;font-weight:800;margin-bottom:.8rem}
-.btn{background:var(--rojo);color:#fff;border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:800}
-.btn.alt{background:var(--navy)}
-input,select,textarea{width:100%;padding:.5rem .65rem;border:1px solid #c9cfdc;border-radius:8px;background:#fff;color:var(--navy)}
-label{display:grid;gap:.25rem;font-size:.85rem;font-weight:700}
-.login{display:grid;place-items:center;min-height:75vh;padding:1.4rem}
-.login form{width:min(380px,100%);display:grid;gap:.9rem}
-#panel{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(300px,1fr);gap:1.2rem;padding:1.2rem;max-width:1300px;margin:0 auto;align-items:start}
-.columna{display:grid;gap:1.2rem}
-.filtros{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.8rem}
-.chip{border:1px solid var(--line);background:#fff;border-radius:999px;padding:.3rem .8rem;font-size:.85rem;color:var(--navy)}
-.chip.on{background:var(--navy);color:#fff;border-color:var(--navy)}
-.chip i{font-style:normal;opacity:.8;margin-left:.2rem}
-#buscar{margin-bottom:.8rem}
-table{width:100%;border-collapse:collapse;font-size:.9rem}
-th,td{text-align:left;padding:.55rem .4rem;border-bottom:1px solid var(--line);vertical-align:middle}
-th{color:var(--muted);font-size:.8rem}
-tbody tr{cursor:pointer}
-tbody tr:hover{background:var(--mist)}
-tbody tr.sel{background:#e2ebf8}
-small{color:var(--muted)}
-.e-pendiente{--c:#b7791f}.e-cotizada{--c:#1f5fb4}.e-confirmada{--c:#1e8e4e}.e-cancelada{--c:#6b7280}
-.badge{background:var(--c);color:#fff;border-radius:999px;padding:.15rem .6rem;font-size:.78rem;font-weight:800;white-space:nowrap}
-.cabecera{display:flex;align-items:center;justify-content:space-between;gap:.6rem;margin-bottom:.8rem}
-.codigo{font-size:1.3rem;font-weight:800}
-dl{display:grid;grid-template-columns:auto 1fr;gap:.35rem .9rem;font-size:.92rem}
-dt{color:var(--muted);font-weight:700}
-dd{word-break:break-word}
-dd a{color:var(--navy)}
-h3{font-size:.9rem;margin:1rem 0 .45rem}
-.estados{display:flex;flex-wrap:wrap;gap:.4rem}
-.estados button{background:#fff;border:2px solid var(--c);color:var(--c);border-radius:999px;padding:.3rem .8rem;font-weight:800;text-transform:capitalize}
-.estados button.activo{background:var(--c);color:#fff}
-.fila{display:flex;flex-wrap:wrap;gap:.6rem;align-items:flex-end}
-.fila label{flex:1;min-width:130px}
-.disp{border-radius:10px;padding:.7rem .9rem;margin:.9rem 0 .5rem;font-weight:800}
-.ok{background:#e6f5ec;color:#1e6b3c}
-.no{background:#fbeaea;color:#8a1c1c}
-.resumen{list-style:none;display:grid;gap:.25rem;font-size:.92rem}
-.notas{margin-top:1rem;display:grid;gap:.5rem}
-.msg{color:#8a1c1c;font-size:.9rem;min-height:1.2em}
-.vacio{color:var(--muted)}
-.copias{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1rem}
-.peligro{background:#fff;color:#8a1c1c;border:2px solid #8a1c1c;margin-top:1rem}
-.exito{color:#1e6b3c}
-@media(max-width:900px){#panel{grid-template-columns:1fr}}
+html{scroll-behavior:smooth}
+body{font-family:Nunito,system-ui,sans-serif;color:var(--navy);line-height:1.6;background:#fff}
+img{max-width:100%}
+a{color:inherit}
+button{font:inherit;cursor:pointer}
+section,footer{scroll-margin-top:80px}
+section{padding:4.5rem 6vw}
+:focus-visible{outline:3px solid var(--rojo);outline-offset:3px}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;background:var(--rojo);color:#fff;font-weight:600;border:0;border-radius:999px;padding:.8rem 1.5rem;text-decoration:none;transition:background .2s}
+.btn:hover{background:var(--rojo-2)}
+.title{text-align:center;font-size:clamp(1.9rem,3.6vw,2.5rem);font-weight:800;line-height:1.2;color:var(--navy)}
+.sub{text-align:center;color:var(--muted);margin-top:.3rem}
+
+/* Encabezado */
+header{position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:1.2rem;padding:.55rem 4vw;background:var(--navy);color:#fff;box-shadow:0 2px 12px rgba(0,0,0,.25)}
+.logo{display:flex;align-items:center;padding-right:1.2rem;border-right:1px solid rgba(255,255,255,.22)}
+.logo img{height:62px;width:auto;background:#fff;border-radius:10px;padding:3px 6px}
+nav{margin-left:auto;display:flex;align-items:center;gap:.2rem;font-size:.92rem;font-weight:700}
+nav a{display:inline-flex;align-items:center;gap:.4rem;padding:.5rem .8rem;border-radius:999px;color:#fff;text-decoration:none;white-space:nowrap}
+nav a:hover{background:rgba(255,255,255,.12)}
+nav a.activo{background:var(--rojo)}
+.ic{width:17px;height:17px;flex:none}
+.cta{margin-left:.6rem;padding:.6rem 1.1rem;font-size:.9rem;white-space:nowrap}
+.menu{display:none;margin-left:.6rem;background:none;border:0;color:#fff;font-size:1.7rem}
+header nav.open{background:var(--navy)}
+
+/* Carrusel principal */
+.hero{position:relative;height:min(80vh,640px);min-height:480px;overflow:hidden;background:var(--navy)}
+.slide{position:absolute;inset:0;background:var(--navy-2) center/cover no-repeat;opacity:0;visibility:hidden;transition:opacity .8s ease,visibility .8s}
+.slide.on{opacity:1;visibility:visible}
+.slide::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,20,60,.9),rgba(0,20,60,.5) 50%,rgba(0,20,60,.05))}
+.copy{position:relative;height:100%;max-width:660px;padding:0 6vw;display:flex;flex-direction:column;justify-content:center;color:#fff}
+.t{font-size:clamp(2.1rem,4.6vw,3.6rem);font-weight:800;line-height:1.15}
+.script{font-family:Yellowtail,cursive;font-weight:400;color:#f2b63a;font-size:clamp(2.4rem,5vw,4rem);line-height:1.2}
+.copy p{font-size:clamp(1rem,1.5vw,1.15rem);margin:1rem 0 1.8rem;max-width:36ch}
+.arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:2;width:46px;height:46px;border-radius:50%;border:0;background:rgba(0,30,83,.8);color:#fff;font-size:1.8rem;line-height:1;display:grid;place-items:center}
+.prev{left:1.2rem}
+.next{right:1.2rem}
+
+/* Servicios */
+#servicios{background:var(--mist)}
+.servicios{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;margin-top:2.6rem}
+.servicio{background:#fff;border-top:4px solid var(--rojo);border-radius:14px;padding:2rem 1.4rem;text-align:center;box-shadow:0 4px 14px rgba(0,30,83,.06)}
+.servicio span{display:block;font-size:2.6rem;line-height:1;margin-bottom:1rem}
+.servicio h3{font-size:1.1rem;font-weight:700;color:var(--navy);margin-bottom:.5rem}
+.servicio p{font-size:.92rem;color:var(--muted);line-height:1.5}
+
+/* Galería */
+#galeria{background:var(--mist)}
+.carrusel{position:relative;max-width:1150px;height:clamp(240px,38vw,400px);margin:2.4rem auto 0;border-radius:16px;overflow:hidden;background:var(--navy-2)}
+.slides{display:flex;height:100%;transition:transform .6s ease}
+.foto{flex:0 0 100%;height:100%;margin:0;position:relative;background:var(--navy-2) center/cover no-repeat}
+.foto span{position:absolute;left:1.2rem;bottom:1.2rem;padding:.4rem .9rem;border-radius:8px;background:rgba(11,22,40,.85);color:#fff;font-weight:800;font-size:1.1rem}
+.carrusel .arrow{width:44px;height:44px;border:0;background:rgba(11,22,40,.8);font-size:1.6rem}
+.dots{position:absolute;bottom:1.1rem;left:50%;transform:translateX(-50%);display:flex;gap:.55rem;z-index:2}
+.dots button{width:12px;height:12px;border-radius:50%;border:2px solid #fff;background:transparent;padding:0;cursor:pointer}
+.dots .on{background:var(--rojo);border-color:var(--rojo)}
+
+/* Nosotros y testimonios */
+.nosotros p{max-width:700px;margin:1.6rem auto 0;text-align:center;color:#333;font-size:1.05rem}
+#testimonios{background:#faf8f5}
+.testis{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.4rem;margin:2.4rem auto 0;max-width:1100px}
+.testis blockquote{background:#fff;border-top:4px solid var(--rojo);border-radius:14px;padding:1.8rem 1.5rem;text-align:center;font-style:italic;color:var(--navy);box-shadow:0 4px 14px rgba(0,30,83,.06)}
+.testis cite{display:block;margin-top:1rem;font-style:normal;font-weight:800;color:var(--navy);font-size:.95rem}
+
+/* Contacto, consulta y pie */
+.btn-claro{background:transparent;color:#fff;border:2px solid #fff}
+.btn-claro:hover{background:rgba(255,255,255,.12)}
+.contacto-sec{background:var(--navy);color:#fff;padding:3.4rem 6vw 2.6rem;text-align:center}
+.contacto-sec .title{color:#fff}
+.contacto-sec .sub{color:#c9d3e6}
+.contacto-sec .cta-bar{padding:1.6rem 0 0}
+.beneficios{display:flex;flex-wrap:wrap;justify-content:center;gap:1rem 2.4rem;margin-bottom:2.4rem;font-size:.95rem}
+.beneficios div{display:flex;align-items:center;gap:.6rem}
+.beneficios i{font-style:normal;font-size:1.5rem}
+.consulta{margin-top:2.6rem;padding-top:2.2rem;border-top:1px solid rgba(255,255,255,.16)}
+.consulta h3{font-size:1.2rem;font-weight:800;margin-bottom:1rem}
+.fila-consulta{display:flex;flex-wrap:wrap;justify-content:center;gap:.7rem}
+.fila-consulta input{width:min(250px,100%);padding:.7rem 1rem;border:1px solid #c9d3e6;border-radius:8px;font:inherit;color:var(--navy);background:#fff}
+.c-res{margin-top:1rem;min-height:1.4em;font-weight:700}
+.c-res.ok{color:#9ff0bd}
+.c-res.no{color:#ffb3b3}
+.pie{background:#000f2e;color:#c9d3e6;padding:1.1rem 6vw;font-size:.9rem}
+.pie-fila{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.6rem 1.5rem;max-width:1200px;margin:0 auto}
+.pie a{color:#fff;font-weight:800}
+
+/* WhatsApp flotante */
+.wa{position:fixed;right:1.2rem;bottom:1.2rem;z-index:60;width:60px;height:60px;border-radius:50%;background:#25d366;color:#fff;display:grid;place-items:center;box-shadow:0 6px 18px rgba(0,0,0,.25)}
+.wa svg{width:32px;height:32px}
+
+/* Ventana de reserva */
+dialog{border:0;border-radius:16px;padding:0;width:min(560px,92vw);color:var(--navy)}
+dialog::backdrop{background:rgba(11,22,40,.7)}
+#form{padding:1.8rem;display:grid;grid-template-columns:1fr 1fr;gap:.9rem 1rem}
+#form h2{grid-column:1/-1;font-size:1.5rem}
+#form label{display:grid;gap:.35rem;font-size:.85rem;font-weight:600}
+#form .full{grid-column:1/-1}
+#form input,#form select,#form textarea{font:inherit;font-weight:400;font-size:.95rem;padding:.6rem .75rem;border:1px solid #c9cfdc;border-radius:8px;background:#fff;color:var(--navy)}
+#form input:focus,#form select:focus,#form textarea:focus{outline:2px solid var(--rojo);border-color:transparent}
+#form .link{background:none;border:0;color:var(--muted);text-decoration:underline}
+#msg{min-height:1.4em;font-size:.9rem;color:var(--muted)}
+
+@media(max-width:1000px){
+  nav{display:none}
+  nav.open{display:flex;flex-direction:column;gap:.9rem;position:absolute;top:100%;left:0;right:0;padding:1rem 6vw;background:#fff;box-shadow:0 10px 20px rgba(0,30,83,.12)}
+  .cta{margin-left:auto}
+  .menu{display:block}
+  .logo img{height:52px}
+}
+@media(max-width:900px){
+  .servicios{grid-template-columns:repeat(2,1fr);gap:2rem 0}
+  .servicio+.servicio{border:0}
+}
+@media(max-width:560px){
+  #form{grid-template-columns:1fr}
+  .track{padding:0 3.2rem}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+}
+@media(max-width:560px){.servicios{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 
 <header>
-  <img src="img/02_logo_principal.png" alt="Mery's Catering">
-  <h1>Panel de reservas</h1>
-  <span class="espacio"></span>
-  <button class="salir hidden" id="salir">Salir</button>
+  <a class="logo" href="#inicio" aria-label="Mery's Catering, ir al inicio"><img src="img/02_logo_principal.png" alt="Mery's Catering"></a>
+  <nav id="nav">
+    <a href="#inicio" class="activo"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/></svg>Inicio</a>
+    <a href="#nosotros"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/></svg>Nosotros</a>
+    <a href="#servicios"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>Nuestros Servicios</a>
+    <a href="#galeria"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>Galería</a>
+    <a href="#testimonios"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.5 8.5 0 0 1-12.3 7.6L3 21l1.9-5.5A8.5 8.5 0 1 1 21 11.5z"/></svg>Testimonios</a>
+    <a href="#contacto"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg>Contacto</a>
+  </nav>
+  <button class="btn cta" data-reserva><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Reserva tu Evento</button>
+  <button class="menu" id="menu" aria-label="Abrir menú">☰</button>
 </header>
 
-<div class="login" id="login">
-  <form class="card" id="form-login">
-    <h2>Entrar al panel</h2>
-    <label>Correo<input type="email" id="l-correo" required autocomplete="username"></label>
-    <label>Contraseña<input type="password" id="l-clave" required autocomplete="current-password"></label>
-    <button class="btn" type="submit">Entrar</button>
-    <p class="msg" id="l-msg"></p>
-  </form>
+<div class="hero" id="inicio">
+  <div class="slide on" style="background-image:url('img/hero-1.jpg')">
+    <div class="copy">
+      <h1 class="t">Mery's Catering<br><span class="script">sabor, calidad y servicio</span></h1>
+      <p>Catering y servicios para pasadías, celebraciones y eventos especiales.</p>
+      <button class="btn" data-reserva>Cotiza tu evento →</button>
+    </div>
+  </div>
+  <div class="slide" style="background-image:url('img/hero-2.jpg')">
+    <div class="copy">
+      <h2 class="t">Bodas de ensueño<br><span class="script">con cada detalle cuidado</span></h2>
+      <p>Decoración, comida y atención para el día más importante.</p>
+      <button class="btn" data-reserva>Cotiza tu evento →</button>
+    </div>
+  </div>
+  <div class="slide" style="background-image:url('img/hero-3.jpg')">
+    <div class="copy">
+      <h2 class="t">Tu empresa, en su mejor momento<br><span class="script">eventos con elegancia</span></h2>
+      <p>Organizamos encuentros corporativos con logística y atención impecables.</p>
+      <button class="btn" data-reserva>Cotiza tu evento →</button>
+    </div>
+  </div>
+  <button class="arrow prev" id="hero-prev" aria-label="Anterior">‹</button>
+  <button class="arrow next" id="hero-next" aria-label="Siguiente">›</button>
+  <div class="dots" id="hero-dots">
+    <button class="on" aria-label="Diapositiva 1"></button>
+    <button aria-label="Diapositiva 2"></button>
+    <button aria-label="Diapositiva 3"></button>
+  </div>
 </div>
 
-<main id="panel" class="hidden">
-  <section class="card">
-    <h2>Solicitudes</h2>
-    <div class="filtros">
-      <button class="chip on" data-f="todas">Todas <i id="n-todas"></i></button>
-      <button class="chip" data-f="pendiente">Pendientes <i id="n-pendiente"></i></button>
-      <button class="chip" data-f="cotizada">Cotizadas <i id="n-cotizada"></i></button>
-      <button class="chip" data-f="confirmada">Confirmadas <i id="n-confirmada"></i></button>
-      <button class="chip" data-f="cancelada">Canceladas <i id="n-cancelada"></i></button>
-    </div>
-    <input type="search" id="buscar" placeholder="Buscar por código, nombre, correo o teléfono">
-    <div id="lista"></div>
-    <div class="copias">
-      <button class="btn alt" id="bk-json">Descargar copia (JSON)</button>
-      <button class="btn alt" id="bk-csv">Descargar CSV para Excel</button>
-    </div>
-    <p class="msg" id="aviso"></p>
-  </section>
-
-  <div class="columna">
-    <section class="card">
-      <h2>Revisar disponibilidad</h2>
-      <form class="fila" id="form-disp">
-        <label>Fecha<input type="date" id="d-fecha" required></label>
-        <label>Personas<input type="number" id="d-personas" min="1" value="10" required></label>
-        <button class="btn alt" type="submit">Revisar</button>
-      </form>
-      <div id="d-res"></div>
-    </section>
-    <section class="card" id="detalle"><p class="vacio">Selecciona una solicitud de la lista.</p></section>
+<section id="servicios">
+  <h2 class="title">Nuestros servicios</h2>
+  <p class="sub">Un evento para cada ocasión.</p>
+  <div class="servicios">
+    <div class="servicio"><span>🥂</span><h3>Pasadías y celebraciones</h3><p>Jornadas de recreación y descanso con todo organizado.</p></div>
+    <div class="servicio"><span>🎂</span><h3>Cumpleaños</h3><p>Fiestas para todas las edades, con la temática que elijas.</p></div>
+    <div class="servicio"><span>💍</span><h3>Aniversarios</h3><p>Celebra cada año juntos con una velada especial.</p></div>
+    <div class="servicio"><span>💼</span><h3>Eventos empresariales</h3><p>Reuniones, lanzamientos y celebraciones de equipo.</p></div>
+    <div class="servicio"><span>👰</span><h3>Bodas y eventos sociales</h3><p>Tu boda o gran celebración, de principio a fin.</p></div>
+    <div class="servicio"><span>🎈</span><h3>Decoración y ambientación</h3><p>Montajes, iluminación y detalles que transforman el lugar.</p></div>
   </div>
-</main>
+</section>
+
+<section id="galeria">
+  <h2 class="title">Galería de nuestros eventos</h2>
+  <p class="sub">Celebraciones realizadas con nuestros clientes.</p>
+  <div class="carrusel">
+    <div class="slides" id="slides">
+      <figure class="foto" role="img" aria-label="Decoración de cumpleaños" style="background-image:url('img/galeria-1.jpg')"><span>Feliz Cumpleaños</span></figure>
+      <figure class="foto" role="img" aria-label="Celebración al aire libre" style="background-image:url('img/galeria-2.jpg')"><span>Celebración al aire libre</span></figure>
+      <figure class="foto" role="img" aria-label="Mesa de pasadía con globos" style="background-image:url('img/galeria-3.jpg')"><span>Mi Pasadita</span></figure>
+      <figure class="foto" role="img" aria-label="Carpa iluminada" style="background-image:url('img/galeria-4.jpg')"><span>Carpa iluminada</span></figure>
+    </div>
+    <button class="arrow prev" id="gal-prev" aria-label="Anterior">‹</button>
+    <button class="arrow next" id="gal-next" aria-label="Siguiente">›</button>
+    <div class="dots" id="gal-dots">
+      <button class="on" aria-label="Foto 1"></button>
+      <button aria-label="Foto 2"></button>
+      <button aria-label="Foto 3"></button>
+      <button aria-label="Foto 4"></button>
+    </div>
+  </div>
+</section>
+
+<section id="nosotros" class="nosotros">
+  <h2 class="title">Nosotros</h2>
+  <p>En Mery's Catering creamos celebraciones a la medida: desde una pasadía íntima hasta una boda con cientos de invitados. Cuidamos cada detalle para que tú solo tengas que disfrutar.</p>
+</section>
+
+<section id="testimonios">
+  <h2 class="title">Testimonios</h2>
+  <p class="sub">Lo que dicen nuestros clientes.</p>
+  <!-- Reemplazar por testimonios reales de clientes -->
+  <div class="testis">
+    <blockquote>“Todo quedó perfecto para el cumpleaños de mi hija. Atención excelente.”<cite>Cliente, cumpleaños</cite></blockquote>
+    <blockquote>“Organizaron nuestro aniversario con mucho detalle y puntualidad.”<cite>Cliente, aniversario</cite></blockquote>
+    <blockquote>“Profesionales de principio a fin para nuestro evento corporativo.”<cite>Cliente, empresa</cite></blockquote>
+  </div>
+</section>
+
+<section class="contacto-sec" id="contacto">
+  <div class="beneficios">
+    <div><i>🤝</i>Compromiso y profesionalismo</div>
+    <div><i>🛡️</i>Eventos seguros y bien organizados</div>
+    <div><i>😊</i>Momentos inolvidables</div>
+  </div>
+  <h2 class="title">Contáctanos</h2>
+  <p class="sub">Cotiza tu evento o reserva la fecha que deseas.</p>
+  <div class="cta-bar">
+    <a class="btn" data-wa target="_blank" rel="noopener">Escríbenos por WhatsApp</a>
+    <button class="btn btn-claro" data-reserva>Reserva tu Evento</button>
+  </div>
+  <div class="consulta">
+    <h3>Consulta el estado de tu solicitud</h3>
+    <form class="fila-consulta" id="form-consulta">
+      <input id="c-codigo" placeholder="Código, ej. RES-2026-001" autocomplete="off" required>
+      <input id="c-tel" type="tel" placeholder="Tu número de WhatsApp" required>
+      <button class="btn" type="submit">Consultar</button>
+    </form>
+    <p class="c-res" id="c-res" role="status"></p>
+  </div>
+</section>
+<footer class="pie">
+  <div class="pie-fila">
+    <span>© <span id="anio"></span> Mery's Catering. Creando momentos inolvidables.</span>
+    <a href="admin.html">Panel administrador</a>
+  </div>
+</footer>
+
+<a class="wa" data-wa target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+</a>
+
+<dialog id="reserva" aria-labelledby="res-titulo">
+  <form id="form">
+    <h2 id="res-titulo">Reserva tu evento</h2>
+    <label>Nombre completo<input name="nombre" required></label>
+    <label>Correo electrónico<input name="correo" type="email" required></label>
+    <label>Teléfono<input name="telefono" type="tel" required></label>
+    <label>Tipo de evento
+      <select name="tipo" required>
+        <option>Pasadía</option>
+        <option>Cumpleaños</option>
+        <option>Aniversario</option>
+        <option>Corporativo</option>
+        <option>Boda</option>
+        <option>Decoración</option>
+        <option>Comidas y catering</option>
+      </select>
+    </label>
+    <label>Fecha<input name="fecha" type="date" required></label>
+    <label>Invitados<input name="invitados" type="number" min="1" value="10" required></label>
+    <label class="full">Lugar<input name="lugar" placeholder="Ciudad o salón"></label>
+    <label class="full">Mensaje<textarea name="mensaje" rows="3" placeholder="Cuéntanos más sobre tu evento"></textarea></label>
+    <p id="msg" class="full"></p>
+    <button class="btn full" type="submit">Enviar solicitud</button>
+    <button class="link full" type="button" id="cerrar">Cancelar</button>
+  </form>
+</dialog>
 
 <script>
-// ===== CONFIGURACIÓN: los mismos valores que EVENTOS_MERY.html =====
+// ===== CONFIGURACIÓN: edita aquí antes de subir a GitHub =====
 const CONFIG = {
+  whatsapp: '573184896105',        // número con indicativo de país, sin + ni espacios
+  telefono: '+57 318 489 6105',
+  correo: 'helpdesk.col@outlook.com',
+  // Opcional: base de datos Supabase. Si quedan vacíos, la reserva se envía por WhatsApp.
   supabaseUrl: 'https://vlrhydgsjholcngvpybm.supabase.co',
   supabaseKey: 'sb_publishable_kSMPT9LRQIfTvT_eeRdrrw_Y1haBcqN'
 };
 
-const ESTADOS = ['pendiente', 'cotizada', 'confirmada', 'cancelada'];
 const $ = s => document.querySelector(s);
 const $$ = s => [...document.querySelectorAll(s)];
-const esc = t => String(t ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
-let sesion = JSON.parse(sessionStorage.getItem('sesion') || 'null');
-let datos = [], filtro = 'todas', seleccionado = null;
+// Datos de contacto y año
+$('#anio').textContent = new Date().getFullYear();
+$$('[data-tel]').forEach(a => { a.textContent = CONFIG.telefono; a.href = 'tel:' + CONFIG.telefono.replace(/\s/g, ''); });
+$$('[data-mail]').forEach(a => { a.textContent = CONFIG.correo; a.href = 'mailto:' + CONFIG.correo; });
+$$('[data-wa]').forEach(a => a.href = `https://wa.me/${CONFIG.whatsapp}`);
 
-async function api(ruta, opciones = {}) {
-  const r = await fetch(CONFIG.supabaseUrl + ruta, {
-    ...opciones,
-    headers: { apikey: CONFIG.supabaseKey, Authorization: `Bearer ${sesion.token}`, 'Content-Type': 'application/json', ...(opciones.headers || {}) }
-  });
-  if (r.status === 401 || r.status === 403) { salir(); throw new Error('La sesión venció. Entra de nuevo.'); }
-  if (!r.ok) throw new Error(await r.text());
-  const texto = await r.text();
-  return texto ? JSON.parse(texto) : null;
+// Carrusel principal
+const slides = $$('.slide'), hdots = $$('#hero-dots button');
+let h = 0, hTimer;
+function irSlide(n) {
+  h = (n + slides.length) % slides.length;
+  slides.forEach((d, k) => d.classList.toggle('on', k === h));
+  hdots.forEach((d, k) => d.classList.toggle('on', k === h));
 }
-
-// Inicio de sesión
-function mensajeError(status, motivo) {
-  if (/invalid_credentials|Invalid login/i.test(motivo)) return 'Correo o contraseña incorrectos.';
-  if (/email_not_confirmed|not confirmed/i.test(motivo)) return 'El correo no está confirmado. En Supabase, confirma el usuario.';
-  if (status === 401 || /API key/i.test(motivo)) return 'La clave supabaseKey no es correcta. Usa la clave anon public.';
-  if (status === 404) return 'La URL de Supabase no es correcta. No debe terminar en /rest/v1/.';
-  return `No se pudo iniciar sesión (código ${status}${motivo ? ': ' + motivo : ''}).`;
+function autoHero() {
+  clearInterval(hTimer);
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) hTimer = setInterval(() => irSlide(h + 1), 6000);
 }
+$('#hero-prev').onclick = () => { irSlide(h - 1); autoHero(); };
+$('#hero-next').onclick = () => { irSlide(h + 1); autoHero(); };
+hdots.forEach((d, k) => d.onclick = () => { irSlide(k); autoHero(); });
+autoHero();
 
-$('#form-login').onsubmit = async e => {
+// Galería
+const slidesEl = $('#slides'), fotos = $$('.foto'), gdots = $$('#gal-dots button');
+let g = 0, gTimer;
+function irFoto(n) {
+  g = (n + fotos.length) % fotos.length;
+  slidesEl.style.transform = `translateX(-${g * 100}%)`;
+  gdots.forEach((d, k) => d.classList.toggle('on', k === g));
+}
+function autoGaleria() {
+  clearInterval(gTimer);
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) gTimer = setInterval(() => irFoto(g + 1), 6000);
+}
+$('#gal-prev').onclick = () => { irFoto(g - 1); autoGaleria(); };
+$('#gal-next').onclick = () => { irFoto(g + 1); autoGaleria(); };
+gdots.forEach((d, k) => d.onclick = () => { irFoto(k); autoGaleria(); });
+autoGaleria();
+
+// Menú móvil
+const nav = $('#nav');
+$('#menu').onclick = () => nav.classList.toggle('open');
+$$('#nav a').forEach(a => a.onclick = () => nav.classList.remove('open'));
+
+// Ventana de reserva
+const dlg = $('#reserva'), form = $('#form'), msg = $('#msg');
+$$('[data-reserva]').forEach(b => b.onclick = () => { msg.textContent = ''; dlg.showModal(); });
+$('#cerrar').onclick = () => dlg.close();
+dlg.onclick = e => { if (e.target === dlg) dlg.close(); };
+
+form.onsubmit = async e => {
   e.preventDefault();
-  const msg = $('#l-msg');
-  msg.textContent = '';
-  if (!CONFIG.supabaseUrl || !CONFIG.supabaseKey) { msg.textContent = 'Falta configurar supabaseUrl y supabaseKey en admin.html.'; return; }
-  if (/\/rest\/v1\/?$/.test(CONFIG.supabaseUrl)) { msg.textContent = 'supabaseUrl no debe terminar en /rest/v1/. Usa solo https://xxxx.supabase.co'; return; }
+  const d = Object.fromEntries(new FormData(form));
+  d.invitados = Number(d.invitados);
+
+  // Sin Supabase: se abre WhatsApp con los datos ya escritos
+  if (!CONFIG.supabaseUrl) {
+    const texto = `Hola, quiero reservar un evento:\n• Nombre: ${d.nombre}\n• Tipo: ${d.tipo}\n• Fecha: ${d.fecha}\n• Invitados: ${d.invitados}\n• Lugar: ${d.lugar}\n• Correo: ${d.correo}\n• Teléfono: ${d.telefono}\n${d.mensaje}`;
+    window.open(`https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(texto)}`, '_blank', 'noopener');
+    form.reset();
+    dlg.close();
+    return;
+  }
+
+  // Con Supabase: crear_reserva guarda la solicitud y devuelve el código
+  msg.textContent = 'Enviando…';
   try {
-    const r = await fetch(`${CONFIG.supabaseUrl}/auth/v1/token?grant_type=password`, {
+    const r = await fetch(`${CONFIG.supabaseUrl}/rest/v1/rpc/crear_reserva`, {
       method: 'POST',
       headers: { apikey: CONFIG.supabaseKey, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: $('#l-correo').value, password: $('#l-clave').value })
+      body: JSON.stringify({ p_nombre: d.nombre, p_correo: d.correo, p_telefono: d.telefono, p_tipo: d.tipo, p_fecha: d.fecha, p_invitados: d.invitados, p_lugar: d.lugar, p_mensaje: d.mensaje })
     });
-    const j = await r.json().catch(() => ({}));
-    if (!r.ok) {
-      msg.textContent = mensajeError(r.status, j.error_code || j.msg || j.message || j.error_description || '');
+    if (!r.ok) throw new Error(r.status);
+    const codigo = await r.json();
+    msg.textContent = `¡Solicitud recibida! Tu código es ${codigo}. Te escribiremos a ${d.correo}.`;
+    form.reset();
+  } catch {
+    msg.textContent = 'No pudimos enviar la solicitud. Intenta de nuevo o escríbenos por WhatsApp.';
+  }
+};
+// Consulta de estado (código + número de WhatsApp)
+$('#form-consulta').onsubmit = async e => {
+  e.preventDefault();
+  const out = $('#c-res');
+  out.className = 'c-res';
+  if (!CONFIG.supabaseUrl) { out.textContent = 'La consulta aún no está configurada.'; return; }
+  out.textContent = 'Consultando…';
+  const codigo = $('#c-codigo').value.trim().toUpperCase();
+  try {
+    const r = await fetch(`${CONFIG.supabaseUrl}/rest/v1/rpc/consultar_estado`, {
+      method: 'POST',
+      headers: { apikey: CONFIG.supabaseKey, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ p_codigo: codigo, p_telefono: $('#c-tel').value })
+    });
+    if (!r.ok) throw new Error(r.status);
+    const estado = await r.json();
+    if (!estado) {
+      out.classList.add('no');
+      out.textContent = 'No encontramos una solicitud con ese código y número.';
       return;
     }
-    sesion = { token: j.access_token };
-    sessionStorage.setItem('sesion', JSON.stringify(sesion));
-    iniciar();
+    const etiquetas = { pendiente: 'Pendiente', cotizada: 'Cotizada', confirmada: 'Confirmada', cancelada: 'Cancelada' };
+    out.classList.add('ok');
+    out.textContent = `Tu solicitud ${codigo} está: ${etiquetas[estado] || estado}.`;
   } catch {
-    msg.textContent = 'No se pudo conectar con Supabase. Revisa supabaseUrl.';
+    out.classList.add('no');
+    out.textContent = 'No pudimos consultar. Intenta de nuevo o escríbenos por WhatsApp.';
   }
 };
-
-function iniciar() {
-  $('#login').classList.add('hidden');
-  $('#panel').classList.remove('hidden');
-  $('#salir').classList.remove('hidden');
-  $('#d-fecha').value ||= new Date().toISOString().slice(0, 10);
-  cargar();
-}
-
-function salir() {
-  sessionStorage.removeItem('sesion');
-  sesion = null;
-  $('#panel').classList.add('hidden');
-  $('#salir').classList.add('hidden');
-  $('#login').classList.remove('hidden');
-}
-$('#salir').onclick = salir;
-
-// Solicitudes
-async function cargar() {
-  try {
-    datos = await api('/rest/v1/reservas?select=*&order=fecha.asc,creada_en.desc');
-    pintarLista();
-    pintarDetalle();
-  } catch (e) {
-    if (sesion) $('#lista').innerHTML = `<p class="msg">No se pudieron cargar las solicitudes: ${esc(e.message)}</p>`;
-  }
-}
-
-function pintarLista() {
-  const q = $('#buscar').value.trim().toLowerCase();
-  ESTADOS.forEach(e => $('#n-' + e).textContent = datos.filter(r => r.estado === e).length);
-  $('#n-todas').textContent = datos.length;
-  const filas = datos.filter(r =>
-    (filtro === 'todas' || r.estado === filtro) &&
-    (!q || [r.codigo, r.nombre, r.correo, r.telefono].join(' ').toLowerCase().includes(q)));
-  $('#lista').innerHTML = filas.length
-    ? `<table>
-        <thead><tr><th>Código</th><th>Fecha</th><th>Tipo</th><th>Personas</th><th>Estado</th></tr></thead>
-        <tbody>${filas.map(r => `
-          <tr data-id="${r.id}" class="${r.id === seleccionado ? 'sel' : ''}">
-            <td><b>${esc(r.codigo)}</b><br><small>${esc(r.nombre)}</small></td>
-            <td>${esc(r.fecha)}</td><td>${esc(r.tipo)}</td><td>${esc(r.invitados)}</td>
-            <td><span class="badge e-${r.estado}">${r.estado}</span></td>
-          </tr>`).join('')}
-        </tbody>
-      </table>`
-    : '<p class="vacio">No hay solicitudes con ese filtro.</p>';
-}
-
-$$('.chip').forEach(c => c.onclick = () => {
-  filtro = c.dataset.f;
-  $$('.chip').forEach(x => x.classList.toggle('on', x === c));
-  pintarLista();
-});
-$('#buscar').oninput = pintarLista;
-$('#lista').onclick = e => {
-  const fila = e.target.closest('tr[data-id]');
-  if (!fila) return;
-  seleccionado = Number(fila.dataset.id);
-  pintarLista();
-  pintarDetalle();
-};
-
-// Detalle de una solicitud
-function pintarDetalle() {
-  const r = datos.find(x => x.id === seleccionado);
-  if (!r) { $('#detalle').innerHTML = '<p class="vacio">Selecciona una solicitud de la lista.</p>'; return; }
-  const tel = String(r.telefono).replace(/\D/g, '');
-  $('#detalle').innerHTML = `
-    <div class="cabecera"><span class="codigo">${esc(r.codigo)}</span><span class="badge e-${r.estado}">${r.estado}</span></div>
-    <dl>
-      <dt>Nombre</dt><dd>${esc(r.nombre)}</dd>
-      <dt>Correo</dt><dd><a href="mailto:${esc(r.correo)}">${esc(r.correo)}</a></dd>
-      <dt>Teléfono</dt><dd><a href="tel:${tel}">${esc(r.telefono)}</a></dd>
-      <dt>Tipo</dt><dd>${esc(r.tipo)}</dd>
-      <dt>Fecha</dt><dd>${esc(r.fecha)}</dd>
-      <dt>Personas</dt><dd>${esc(r.invitados)}</dd>
-      <dt>Lugar</dt><dd>${esc(r.lugar || '—')}</dd>
-      <dt>Mensaje</dt><dd>${esc(r.mensaje || '—')}</dd>
-    </dl>
-    <h3>Estado</h3>
-    <div class="estados">${ESTADOS.map(e => `<button class="e-${e}${e === r.estado ? ' activo' : ''}" data-estado="${e}">${e}</button>`).join('')}</div>
-    <h3>Disponibilidad para esta solicitud</h3>
-    <div id="d-det"></div>
-    <div class="notas">
-      <label>Notas internas<textarea id="notas" rows="3">${esc(r.notas || '')}</textarea></label>
-      <button class="btn alt" id="guardar-notas">Guardar notas</button>
-    </div>
-    <button class="btn peligro" id="eliminar">Eliminar solicitud</button>
-    <p class="msg" id="det-msg"></p>`;
-  revisar(r.fecha, r.invitados, $('#d-det'), r.id);
-}
-
-$('#detalle').onclick = e => {
-  const boton = e.target.closest('[data-estado]');
-  if (boton) return cambiar({ estado: boton.dataset.estado }, 'Estado actualizado.');
-  if (e.target.id === 'guardar-notas') return cambiar({ notas: $('#notas').value }, 'Notas guardadas.');
-  if (e.target.id === 'eliminar') return eliminar();
-};
-
-async function cambiar(cambios, aviso) {
-  try {
-    await api(`/rest/v1/reservas?id=eq.${seleccionado}`, { method: 'PATCH', body: JSON.stringify(cambios) });
-    await cargar();
-    const m = $('#det-msg');
-    if (m) m.textContent = aviso;
-  } catch (err) {
-    const m = $('#det-msg');
-    if (m) m.textContent = err.message;
-  }
-}
-
-// Disponibilidad: fecha y cantidad de personas
-async function revisar(fecha, personas, destino = $('#d-res'), excluir = null) {
-  destino.textContent = 'Revisando…';
-  try {
-    const d = await api('/rest/v1/rpc/disponibilidad', {
-      method: 'POST',
-      body: JSON.stringify({ p_fecha: fecha, p_personas: Number(personas), p_excluir: excluir })
-    });
-    destino.innerHTML = `
-      <div class="disp ${d.disponible ? 'ok' : 'no'}">${d.disponible ? 'Hay disponibilidad' : 'No hay disponibilidad'} el ${esc(fecha)} para ${esc(personas)} personas</div>
-      <ul class="resumen">
-        <li>Eventos ese día: <b>${d.eventos}</b> de ${d.max_eventos}</li>
-        <li>Personas ya comprometidas: <b>${d.personas_comprometidas}</b> de ${d.max_personas}</li>
-      </ul>`;
-  } catch (e) {
-    destino.textContent = 'No se pudo revisar: ' + e.message;
-  }
-}
-
-$('#form-disp').onsubmit = e => {
-  e.preventDefault();
-  revisar($('#d-fecha').value, $('#d-personas').value);
-};
-
-// Avisos generales
-function avisar(texto, error = false) {
-  const a = $('#aviso');
-  a.textContent = texto;
-  a.className = error ? 'msg' : 'msg exito';
-}
-
-// Copias de seguridad
-function descargar(nombre, tipo, contenido) {
-  const url = URL.createObjectURL(new Blob([contenido], { type: tipo }));
-  Object.assign(document.createElement('a'), { href: url, download: nombre }).click();
-  URL.revokeObjectURL(url);
-}
-
-const hoy = () => new Date().toISOString().slice(0, 10);
-
-$('#bk-json').onclick = async () => {
-  try {
-    const filas = await api('/rest/v1/reservas?select=*&order=id.asc');
-    descargar(`reservas-${hoy()}.json`, 'application/json',
-      JSON.stringify({ exportado: new Date().toISOString(), total: filas.length, reservas: filas }, null, 2));
-    avisar(`Copia descargada: ${filas.length} solicitudes.`);
-  } catch (e) {
-    avisar('No se pudo generar la copia: ' + e.message, true);
-  }
-};
-
-const COLUMNAS = ['codigo', 'creada_en', 'nombre', 'correo', 'telefono', 'tipo', 'fecha', 'invitados', 'lugar', 'mensaje', 'estado', 'notas'];
-// Evita que Excel ejecute fórmulas escritas por un cliente (=, +, -, @)
-const celda = v => {
-  let t = String(v ?? '');
-  if (/^[=+\-@]/.test(t)) t = "'" + t;
-  return `"${t.replace(/"/g, '""')}"`;
-};
-
-$('#bk-csv').onclick = async () => {
-  try {
-    const filas = await api('/rest/v1/reservas?select=*&order=id.asc');
-    const csv = [COLUMNAS.join(','), ...filas.map(f => COLUMNAS.map(c => celda(f[c])).join(','))].join('\r\n');
-    descargar(`reservas-${hoy()}.csv`, 'text/csv;charset=utf-8', '\uFEFF' + csv);
-    avisar(`Archivo CSV descargado: ${filas.length} solicitudes.`);
-  } catch (e) {
-    avisar('No se pudo generar el archivo: ' + e.message, true);
-  }
-};
-
-// Eliminar una solicitud
-async function eliminar() {
-  const r = datos.find(x => x.id === seleccionado);
-  if (!r) return;
-  if (!confirm(`¿Eliminar la solicitud ${r.codigo} de ${r.nombre}?\n\nNo se puede deshacer. Si quieres conservarla, descarga primero la copia de seguridad.`)) return;
-  try {
-    // Con Prefer, Supabase devuelve las filas borradas; si viene vacío, la política de borrado no existe
-    const borradas = await api(`/rest/v1/reservas?id=eq.${r.id}`, { method: 'DELETE', headers: { Prefer: 'return=representation' } });
-    if (!borradas || !borradas.length) throw new Error('No se eliminó nada. Revisa la política de borrado en Supabase.');
-    seleccionado = null;
-    await cargar();
-    avisar(`Solicitud ${r.codigo} eliminada.`);
-  } catch (err) {
-    avisar(err.message, true);
-  }
-}
-
-if (sesion) iniciar();
 </script>
 </body>
 </html>
