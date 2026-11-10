@@ -260,6 +260,7 @@ function pintarDetalle() {
       <dt>Personas</dt><dd>${esc(r.invitados)}</dd>
       <dt>Lugar</dt><dd>${esc(r.lugar || '—')}</dd>
       <dt>Mensaje</dt><dd>${esc(r.mensaje || '—')}</dd>
+      <dt>Servicios</dt><dd>${esc(r.servicios || '—')}</dd>
     </dl>
     <h3>Estado</h3>
     <div class="estados">${ESTADOS.map(e => `<button class="e-${e}${e === r.estado ? ' activo' : ''}" data-estado="${e}">${e}</button>`).join('')}</div>
@@ -344,7 +345,7 @@ $('#bk-json').onclick = async () => {
   }
 };
 
-const COLUMNAS = ['codigo', 'creada_en', 'nombre', 'correo', 'telefono', 'tipo', 'fecha', 'invitados', 'lugar', 'mensaje', 'estado', 'notas'];
+const COLUMNAS = ['codigo', 'creada_en', 'nombre', 'correo', 'telefono', 'tipo', 'fecha', 'invitados', 'lugar', 'mensaje', 'servicios', 'estado', 'notas'];
 // Evita que Excel ejecute fórmulas escritas por un cliente (=, +, -, @)
 const celda = v => {
   let t = String(v ?? '');
@@ -384,3 +385,4 @@ if (sesion) iniciar();
 </script>
 </body>
 </html>
+
