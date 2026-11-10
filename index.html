@@ -61,11 +61,23 @@ header nav.open{background:var(--navy)}
 
 /* Servicios */
 #servicios{background:var(--mist)}
-.servicios{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;margin-top:2.6rem}
+.servicios{display:flex;flex-wrap:wrap;justify-content:center;gap:1.6rem;margin-top:2.6rem}
+.servicios .servicio{flex:0 0 calc(25% - 1.2rem);display:flex;flex-direction:column}
+.servicio .cotizar{align-self:center;margin-top:auto}
 .servicio{background:#fff;border-top:4px solid var(--rojo);border-radius:14px;padding:2rem 1.4rem;text-align:center;box-shadow:0 4px 14px rgba(0,30,83,.06)}
 .servicio span{display:block;font-size:2.6rem;line-height:1;margin-bottom:1rem}
 .servicio h3{font-size:1.1rem;font-weight:700;color:var(--navy);margin-bottom:.5rem}
 .servicio p{font-size:.92rem;color:var(--muted);line-height:1.5}
+
+/* Catering, coffee break y estaciones */
+.subtitulo{text-align:center;font-size:1.4rem;font-weight:800;color:var(--navy);margin-top:3.4rem}
+.cotizar{margin-top:1rem;background:none;border:2px solid var(--rojo);color:var(--rojo);border-radius:999px;padding:.4rem 1.1rem;font-weight:800;font-size:.9rem;cursor:pointer}
+.cotizar:hover{background:var(--rojo);color:#fff}
+#form .checks{display:grid;grid-template-columns:1fr 1fr;gap:.45rem .8rem;margin-top:.3rem}
+#form .checks label{display:flex;align-items:center;gap:.45rem;font-weight:400;font-size:.9rem}
+#form input[type=checkbox]{width:16px;height:16px;padding:0;border:0;accent-color:var(--rojo)}
+#form fieldset{border:0;grid-column:1/-1;display:grid;gap:.3rem;min-width:0}
+#form legend{font-size:.85rem;font-weight:700}
 
 /* Galería */
 #galeria{background:var(--mist)}
@@ -111,7 +123,7 @@ header nav.open{background:var(--navy)}
 .wa svg{width:32px;height:32px}
 
 /* Ventana de reserva */
-dialog{border:0;border-radius:16px;padding:0;width:min(560px,92vw);color:var(--navy)}
+dialog{border:0;border-radius:16px;padding:0;width:min(560px,92vw);max-height:92vh;overflow:auto;color:var(--navy)}
 dialog::backdrop{background:rgba(11,22,40,.7)}
 #form{padding:1.8rem;display:grid;grid-template-columns:1fr 1fr;gap:.9rem 1rem}
 #form h2{grid-column:1/-1;font-size:1.5rem}
@@ -129,10 +141,8 @@ dialog::backdrop{background:rgba(11,22,40,.7)}
   .menu{display:block}
   .logo img{height:52px}
 }
-@media(max-width:900px){
-  .servicios{grid-template-columns:repeat(2,1fr);gap:2rem 0}
-  .servicio+.servicio{border:0}
-}
+@media(max-width:1100px){.servicios .servicio{flex-basis:calc(33.333% - 1.07rem)}}
+@media(max-width:900px){.servicios .servicio{flex-basis:calc(50% - .8rem)}}
 @media(max-width:560px){
   #form{grid-template-columns:1fr}
   .track{padding:0 3.2rem}
@@ -140,7 +150,7 @@ dialog::backdrop{background:rgba(11,22,40,.7)}
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
 }
-@media(max-width:560px){.servicios{grid-template-columns:1fr}}
+@media(max-width:560px){.servicios .servicio{flex-basis:100%}#form .checks{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -200,6 +210,24 @@ dialog::backdrop{background:rgba(11,22,40,.7)}
     <div class="servicio"><span>💼</span><h3>Eventos empresariales</h3><p>Reuniones, lanzamientos y celebraciones de equipo.</p></div>
     <div class="servicio"><span>👰</span><h3>Bodas y eventos sociales</h3><p>Tu boda o gran celebración, de principio a fin.</p></div>
     <div class="servicio"><span>🎈</span><h3>Decoración y ambientación</h3><p>Montajes, iluminación y detalles que transforman el lugar.</p></div>
+  </div>
+  <h3 class="subtitulo">Catering y Alimentación para Eventos</h3>
+  <div class="servicios">
+    <div class="servicio"><span>🍽️</span><h3>Almuerzos empresariales</h3><button class="cotizar" data-cotizar="Almuerzos empresariales">Cotizar</button></div>
+    <div class="servicio"><span>🎂</span><h3>Almuerzos para cumpleaños y celebraciones</h3><button class="cotizar" data-cotizar="Almuerzos para cumpleaños y celebraciones">Cotizar</button></div>
+    <div class="servicio"><span>🥪</span><h3>Refrigerios y pasabocas</h3><button class="cotizar" data-cotizar="Refrigerios y pasabocas">Cotizar</button></div>
+    <div class="servicio"><span>🥐</span><h3>Desayunos especiales</h3><button class="cotizar" data-cotizar="Desayunos especiales">Cotizar</button></div>
+    <div class="servicio"><span>🍱</span><h3>Comidas empacadas individuales</h3><button class="cotizar" data-cotizar="Comidas empacadas individuales">Cotizar</button></div>
+    <div class="servicio"><span>🚚</span><h3>Entrega de alimentos en el lugar del evento</h3><button class="cotizar" data-cotizar="Entrega de alimentos en el lugar del evento">Cotizar</button></div>
+  </div>
+
+  <h3 class="subtitulo">Coffee Break y Estaciones de Servicio</h3>
+  <div class="servicios">
+    <div class="servicio"><span>☕</span><h3>Estación de café</h3><p>Café caliente, azúcar, endulzantes y vasos.</p><button class="cotizar" data-cotizar="Estación de café">Cotizar</button></div>
+    <div class="servicio"><span>🧃</span><h3>Estación de bebidas</h3><p>Jugos, agua, bebidas frías y calientes.</p><button class="cotizar" data-cotizar="Estación de bebidas">Cotizar</button></div>
+    <div class="servicio"><span>🍪</span><h3>Estación de refrigerios</h3><p>Galletas, pasteles, pasabocas y acompañamientos.</p><button class="cotizar" data-cotizar="Estación de refrigerios">Cotizar</button></div>
+    <div class="servicio"><span>🥯</span><h3>Coffee Break</h3><p>Café, bebidas y alimentos ligeros para reuniones.</p><button class="cotizar" data-cotizar="Coffee Break">Cotizar</button></div>
+    <div class="servicio"><span>🛎️</span><h3>Estación completa</h3><p>Bebidas, refrigerios, menaje y montaje de estación.</p><button class="cotizar" data-cotizar="Estación completa">Cotizar</button></div>
   </div>
 </section>
 
@@ -293,7 +321,23 @@ dialog::backdrop{background:rgba(11,22,40,.7)}
     <label>Fecha<input name="fecha" type="date" required></label>
     <label>Invitados<input name="invitados" type="number" min="1" value="10" required></label>
     <label class="full">Lugar<input name="lugar" placeholder="Ciudad o salón"></label>
-    <label class="full">Mensaje<textarea name="mensaje" rows="3" placeholder="Cuéntanos más sobre tu evento"></textarea></label>
+  <fieldset class="full">
+  <legend>Servicios que quieres cotizar</legend>
+  <div class="checks">
+    <label><input type="checkbox" name="servicios" value="Almuerzos empresariales"> Almuerzos empresariales</label>
+    <label><input type="checkbox" name="servicios" value="Almuerzos para cumpleaños y celebraciones"> Almuerzos para cumpleaños y celebraciones</label>
+    <label><input type="checkbox" name="servicios" value="Refrigerios y pasabocas"> Refrigerios y pasabocas</label>
+    <label><input type="checkbox" name="servicios" value="Desayunos especiales"> Desayunos especiales</label>
+    <label><input type="checkbox" name="servicios" value="Comidas empacadas individuales"> Comidas empacadas individuales</label>
+    <label><input type="checkbox" name="servicios" value="Entrega de alimentos en el lugar del evento"> Entrega de alimentos en el lugar del evento</label>
+    <label><input type="checkbox" name="servicios" value="Estación de café"> Estación de café</label>
+    <label><input type="checkbox" name="servicios" value="Estación de bebidas"> Estación de bebidas</label>
+    <label><input type="checkbox" name="servicios" value="Estación de refrigerios"> Estación de refrigerios</label>
+    <label><input type="checkbox" name="servicios" value="Coffee Break"> Coffee Break</label>
+    <label><input type="checkbox" name="servicios" value="Estación completa"> Estación completa</label>
+  </div>
+</fieldset>
+      <label class="full">Mensaje<textarea name="mensaje" rows="3" placeholder="Cuéntanos más sobre tu evento"></textarea></label>
     <p id="msg" class="full"></p>
     <button class="btn full" type="submit">Enviar solicitud</button>
     <button class="link full" type="button" id="cerrar">Cancelar</button>
@@ -361,7 +405,13 @@ $$('#nav a').forEach(a => a.onclick = () => nav.classList.remove('open'));
 
 // Ventana de reserva
 const dlg = $('#reserva'), form = $('#form'), msg = $('#msg');
-$$('[data-reserva]').forEach(b => b.onclick = () => { msg.textContent = ''; dlg.showModal(); });
+function abrirReserva(servicio) {
+  msg.textContent = '';
+  $$('input[name="servicios"]').forEach(c => c.checked = !!servicio && c.value === servicio);
+  dlg.showModal();
+}
+$$('[data-reserva]').forEach(b => b.onclick = () => abrirReserva());
+$$('[data-cotizar]').forEach(b => b.onclick = () => abrirReserva(b.dataset.cotizar));
 $('#cerrar').onclick = () => dlg.close();
 dlg.onclick = e => { if (e.target === dlg) dlg.close(); };
 
@@ -369,10 +419,11 @@ form.onsubmit = async e => {
   e.preventDefault();
   const d = Object.fromEntries(new FormData(form));
   d.invitados = Number(d.invitados);
+  d.servicios = [...form.querySelectorAll('input[name="servicios"]:checked')].map(c => c.value).join(', ');
 
   // Sin Supabase: se abre WhatsApp con los datos ya escritos
   if (!CONFIG.supabaseUrl) {
-    const texto = `Hola, quiero reservar un evento:\n• Nombre: ${d.nombre}\n• Tipo: ${d.tipo}\n• Fecha: ${d.fecha}\n• Invitados: ${d.invitados}\n• Lugar: ${d.lugar}\n• Correo: ${d.correo}\n• Teléfono: ${d.telefono}\n${d.mensaje}`;
+    const texto = `Hola, quiero reservar un evento:\n• Nombre: ${d.nombre}\n• Tipo: ${d.tipo}\n• Fecha: ${d.fecha}\n• Invitados: ${d.invitados}\n• Lugar: ${d.lugar}\n• Servicios: ${d.servicios || "por definir"}\n• Correo: ${d.correo}\n• Teléfono: ${d.telefono}\n${d.mensaje}`;
     window.open(`https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(texto)}`, '_blank', 'noopener');
     form.reset();
     dlg.close();
@@ -385,7 +436,7 @@ form.onsubmit = async e => {
     const r = await fetch(`${CONFIG.supabaseUrl}/rest/v1/rpc/crear_reserva`, {
       method: 'POST',
       headers: { apikey: CONFIG.supabaseKey, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ p_nombre: d.nombre, p_correo: d.correo, p_telefono: d.telefono, p_tipo: d.tipo, p_fecha: d.fecha, p_invitados: d.invitados, p_lugar: d.lugar, p_mensaje: d.mensaje })
+      body: JSON.stringify({ p_nombre: d.nombre, p_correo: d.correo, p_telefono: d.telefono, p_tipo: d.tipo, p_fecha: d.fecha, p_invitados: d.invitados, p_lugar: d.lugar, p_mensaje: d.mensaje, p_servicios: d.servicios })
     });
     if (!r.ok) throw new Error(r.status);
     const codigo = await r.json();
