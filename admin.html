@@ -63,6 +63,9 @@ h3{font-size:.9rem;margin:1rem 0 .45rem}
 .notas{margin-top:1rem;display:grid;gap:.5rem}
 .msg{color:#8a1c1c;font-size:.9rem;min-height:1.2em}
 .vacio{color:var(--muted)}
+.copias{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1rem}
+.peligro{background:#fff;color:#8a1c1c;border:2px solid #8a1c1c;margin-top:1rem}
+.exito{color:#1e6b3c}
 @media(max-width:900px){#panel{grid-template-columns:1fr}}
 </style>
 </head>
@@ -97,6 +100,11 @@ h3{font-size:.9rem;margin:1rem 0 .45rem}
     </div>
     <input type="search" id="buscar" placeholder="Buscar por código, nombre, correo o teléfono">
     <div id="lista"></div>
+    <div class="copias">
+      <button class="btn alt" id="bk-json">Descargar copia (JSON)</button>
+      <button class="btn alt" id="bk-csv">Descargar CSV para Excel</button>
+    </div>
+    <p class="msg" id="aviso"></p>
   </section>
 
   <div class="columna">
@@ -131,7 +139,7 @@ let datos = [], filtro = 'todas', seleccionado = null;
 async function api(ruta, opciones = {}) {
   const r = await fetch(CONFIG.supabaseUrl + ruta, {
     ...opciones,
-    headers: { apikey: CONFIG.supabaseKey, Authorization: `Bearer ${sesion.token}`, 'Content-Type': 'application/json' }
+    headers: { apikey: CONFIG.supabaseKey, Authorization: `Bearer ${sesion.token}`, 'Content-Type': 'application/json', ...(opciones.headers || {}) }
   });
   if (r.status === 401 || r.status === 403) { salir(); throw new Error('La sesión venció. Entra de nuevo.'); }
   if (!r.ok) throw new Error(await r.text());
@@ -261,6 +269,7 @@ function pintarDetalle() {
       <label>Notas internas<textarea id="notas" rows="3">${esc(r.notas || '')}</textarea></label>
       <button class="btn alt" id="guardar-notas">Guardar notas</button>
     </div>
+    <button class="btn peligro" id="eliminar">Eliminar solicitud</button>
     <p class="msg" id="det-msg"></p>`;
   revisar(r.fecha, r.invitados, $('#d-det'), r.id);
 }
@@ -269,6 +278,7 @@ $('#detalle').onclick = e => {
   const boton = e.target.closest('[data-estado]');
   if (boton) return cambiar({ estado: boton.dataset.estado }, 'Estado actualizado.');
   if (e.target.id === 'guardar-notas') return cambiar({ notas: $('#notas').value }, 'Notas guardadas.');
+  if (e.target.id === 'eliminar') return eliminar();
 };
 
 async function cambiar(cambios, aviso) {
@@ -307,8 +317,70 @@ $('#form-disp').onsubmit = e => {
   revisar($('#d-fecha').value, $('#d-personas').value);
 };
 
+// Avisos generales
+function avisar(texto, error = false) {
+  const a = $('#aviso');
+  a.textContent = texto;
+  a.className = error ? 'msg' : 'msg exito';
+}
+
+// Copias de seguridad
+function descargar(nombre, tipo, contenido) {
+  const url = URL.createObjectURL(new Blob([contenido], { type: tipo }));
+  Object.assign(document.createElement('a'), { href: url, download: nombre }).click();
+  URL.revokeObjectURL(url);
+}
+
+const hoy = () => new Date().toISOString().slice(0, 10);
+
+$('#bk-json').onclick = async () => {
+  try {
+    const filas = await api('/rest/v1/reservas?select=*&order=id.asc');
+    descargar(`reservas-${hoy()}.json`, 'application/json',
+      JSON.stringify({ exportado: new Date().toISOString(), total: filas.length, reservas: filas }, null, 2));
+    avisar(`Copia descargada: ${filas.length} solicitudes.`);
+  } catch (e) {
+    avisar('No se pudo generar la copia: ' + e.message, true);
+  }
+};
+
+const COLUMNAS = ['codigo', 'creada_en', 'nombre', 'correo', 'telefono', 'tipo', 'fecha', 'invitados', 'lugar', 'mensaje', 'estado', 'notas'];
+// Evita que Excel ejecute fórmulas escritas por un cliente (=, +, -, @)
+const celda = v => {
+  let t = String(v ?? '');
+  if (/^[=+\-@]/.test(t)) t = "'" + t;
+  return `"${t.replace(/"/g, '""')}"`;
+};
+
+$('#bk-csv').onclick = async () => {
+  try {
+    const filas = await api('/rest/v1/reservas?select=*&order=id.asc');
+    const csv = [COLUMNAS.join(','), ...filas.map(f => COLUMNAS.map(c => celda(f[c])).join(','))].join('\r\n');
+    descargar(`reservas-${hoy()}.csv`, 'text/csv;charset=utf-8', '\uFEFF' + csv);
+    avisar(`Archivo CSV descargado: ${filas.length} solicitudes.`);
+  } catch (e) {
+    avisar('No se pudo generar el archivo: ' + e.message, true);
+  }
+};
+
+// Eliminar una solicitud
+async function eliminar() {
+  const r = datos.find(x => x.id === seleccionado);
+  if (!r) return;
+  if (!confirm(`¿Eliminar la solicitud ${r.codigo} de ${r.nombre}?\n\nNo se puede deshacer. Si quieres conservarla, descarga primero la copia de seguridad.`)) return;
+  try {
+    // Con Prefer, Supabase devuelve las filas borradas; si viene vacío, la política de borrado no existe
+    const borradas = await api(`/rest/v1/reservas?id=eq.${r.id}`, { method: 'DELETE', headers: { Prefer: 'return=representation' } });
+    if (!borradas || !borradas.length) throw new Error('No se eliminó nada. Revisa la política de borrado en Supabase.');
+    seleccionado = null;
+    await cargar();
+    avisar(`Solicitud ${r.codigo} eliminada.`);
+  } catch (err) {
+    avisar(err.message, true);
+  }
+}
+
 if (sesion) iniciar();
 </script>
 </body>
 </html>
-
