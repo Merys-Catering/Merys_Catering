@@ -78,16 +78,26 @@ nav a:hover{color:var(--rojo)}
 .testis blockquote{background:#fff;border-top:4px solid var(--rojo);border-radius:14px;padding:1.8rem 1.5rem;text-align:center;font-style:italic;color:var(--navy);box-shadow:0 4px 14px rgba(0,30,83,.06)}
 .testis cite{display:block;margin-top:1rem;font-style:normal;font-weight:800;color:var(--navy);font-size:.95rem}
 
-/* Beneficios y pie */
-.pie{background:var(--navy);color:#fff;padding:2.4rem 6vw 1.6rem}
-.beneficios{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1.5rem 2rem}
-.beneficios div{display:flex;align-items:center;gap:.7rem;max-width:230px;font-size:.95rem}
-.beneficios i{font-style:normal;font-size:1.9rem}
-.contacto{margin-top:2rem;padding-top:1.4rem;border-top:1px solid rgba(255,255,255,.14);display:flex;flex-wrap:wrap;justify-content:space-between;gap:.8rem 2rem;font-size:.9rem}
-.contacto a{text-decoration:none}
-.contacto a:hover{text-decoration:underline}
-.pie .btn{background:#fff;color:var(--navy)}
-.pie .btn:hover{background:var(--mist)}
+/* Contacto, consulta y pie */
+.btn-claro{background:transparent;color:#fff;border:2px solid #fff}
+.btn-claro:hover{background:rgba(255,255,255,.12)}
+.contacto-sec{background:var(--navy);color:#fff;padding:3.4rem 6vw 2.6rem;text-align:center}
+.contacto-sec .title{color:#fff}
+.contacto-sec .sub{color:#c9d3e6}
+.contacto-sec .cta-bar{padding:1.6rem 0 0}
+.beneficios{display:flex;flex-wrap:wrap;justify-content:center;gap:1rem 2.4rem;margin-bottom:2.4rem;font-size:.95rem}
+.beneficios div{display:flex;align-items:center;gap:.6rem}
+.beneficios i{font-style:normal;font-size:1.5rem}
+.consulta{margin-top:2.6rem;padding-top:2.2rem;border-top:1px solid rgba(255,255,255,.16)}
+.consulta h3{font-size:1.2rem;font-weight:800;margin-bottom:1rem}
+.fila-consulta{display:flex;flex-wrap:wrap;justify-content:center;gap:.7rem}
+.fila-consulta input{width:min(250px,100%);padding:.7rem 1rem;border:1px solid #c9d3e6;border-radius:8px;font:inherit;color:var(--navy);background:#fff}
+.c-res{margin-top:1rem;min-height:1.4em;font-weight:700}
+.c-res.ok{color:#9ff0bd}
+.c-res.no{color:#ffb3b3}
+.pie{background:#000f2e;color:#c9d3e6;padding:1.1rem 6vw;font-size:.9rem}
+.pie-fila{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.6rem 1.5rem;max-width:1200px;margin:0 auto}
+.pie a{color:#fff;font-weight:800}
 
 /* WhatsApp flotante */
 .wa{position:fixed;right:1.2rem;bottom:1.2rem;z-index:60;width:60px;height:60px;border-radius:50%;background:#25d366;color:#fff;display:grid;place-items:center;box-shadow:0 6px 18px rgba(0,0,0,.25)}
@@ -200,17 +210,32 @@ dialog::backdrop{background:rgba(11,22,40,.7)}
   </div>
 </section>
 
-<footer class="pie" id="contacto">
+<section class="contacto-sec" id="contacto">
   <div class="beneficios">
     <div><i>🤝</i>Compromiso y profesionalismo</div>
     <div><i>🛡️</i>Eventos seguros y bien organizados</div>
     <div><i>😊</i>Momentos inolvidables</div>
-    <a class="btn" data-wa target="_blank" rel="noopener">Escríbenos por WhatsApp</a>
   </div>
-  <div class="contacto">
-    <a data-tel></a>
-    <a data-mail></a>
-    <span>© <span id="anio"></span> Mery's Catering</span>
+  <h2 class="title">Contáctanos</h2>
+  <p class="sub">Cotiza tu evento o reserva la fecha que deseas.</p>
+  <div class="cta-bar">
+    <a class="btn" data-wa target="_blank" rel="noopener">Escríbenos por WhatsApp</a>
+    <button class="btn btn-claro" data-reserva>Reserva tu Evento</button>
+  </div>
+  <div class="consulta">
+    <h3>Consulta el estado de tu solicitud</h3>
+    <form class="fila-consulta" id="form-consulta">
+      <input id="c-codigo" placeholder="Código, ej. RES-2026-001" autocomplete="off" required>
+      <input id="c-tel" type="tel" placeholder="Tu número de WhatsApp" required>
+      <button class="btn" type="submit">Consultar</button>
+    </form>
+    <p class="c-res" id="c-res" role="status"></p>
+  </div>
+</section>
+<footer class="pie">
+  <div class="pie-fila">
+    <span>© <span id="anio"></span> Mery's Catering. Creando momentos inolvidables.</span>
+    <a href="admin.html">Panel administrador</a>
   </div>
 </footer>
 
@@ -252,8 +277,8 @@ const CONFIG = {
   telefono: '+57 318 489 6105',
   correo: 'helpdesk.col@outlook.com',
   // Opcional: base de datos Supabase. Si quedan vacíos, la reserva se envía por WhatsApp.
-  supabaseUrl: 'https://vlrhydgsjholcngvpybm.supabase.co/rest/v1/',                // ej. https://xxxx.supabase.co
-  supabaseKey: 'sb_publishable_kSMPT9LRQIfTvT_eeRdrrw_Y1haBcqN'                 // clave pública "anon"
+  supabaseUrl: '',                // ej. https://xxxx.supabase.co
+  supabaseKey: ''                 // clave pública "anon"
 };
 
 const $ = s => document.querySelector(s);
@@ -321,6 +346,35 @@ form.onsubmit = async e => {
     form.reset();
   } catch {
     msg.textContent = 'No pudimos enviar la solicitud. Intenta de nuevo o escríbenos por WhatsApp.';
+  }
+};
+// Consulta de estado (código + número de WhatsApp)
+$('#form-consulta').onsubmit = async e => {
+  e.preventDefault();
+  const out = $('#c-res');
+  out.className = 'c-res';
+  if (!CONFIG.supabaseUrl) { out.textContent = 'La consulta aún no está configurada.'; return; }
+  out.textContent = 'Consultando…';
+  const codigo = $('#c-codigo').value.trim().toUpperCase();
+  try {
+    const r = await fetch(`${CONFIG.supabaseUrl}/rest/v1/rpc/consultar_estado`, {
+      method: 'POST',
+      headers: { apikey: CONFIG.supabaseKey, Authorization: `Bearer ${CONFIG.supabaseKey}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ p_codigo: codigo, p_telefono: $('#c-tel').value })
+    });
+    if (!r.ok) throw new Error(r.status);
+    const estado = await r.json();
+    if (!estado) {
+      out.classList.add('no');
+      out.textContent = 'No encontramos una solicitud con ese código y número.';
+      return;
+    }
+    const etiquetas = { pendiente: 'Pendiente', cotizada: 'Cotizada', confirmada: 'Confirmada', cancelada: 'Cancelada' };
+    out.classList.add('ok');
+    out.textContent = `Tu solicitud ${codigo} está: ${etiquetas[estado] || estado}.`;
+  } catch {
+    out.classList.add('no');
+    out.textContent = 'No pudimos consultar. Intenta de nuevo o escríbenos por WhatsApp.';
   }
 };
 </script>
