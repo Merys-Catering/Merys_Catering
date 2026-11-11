@@ -265,7 +265,7 @@ function pintarDetalle() {
     </dl>
     <h3>Estado</h3>
     <div class="estados">${ESTADOS.map(e => `<button class="e-${e}${e === r.estado ? ' activo' : ''}" data-estado="${e}">${e}</button>`).join('')}</div>
-    ${["cotizada", "confirmada"].includes(r.estado) ? `<a class="btn alt correo" href="${esc(correoCliente(r))}">Redactar correo al cliente</a>` : ""}
+    ${["cotizada", "confirmada"].includes(r.estado) ? `<a class="btn alt correo" href="${esc(correoCliente(r))}">Redactar correo al cliente</a> <button class="btn alt correo" id="copiar-correo">Copiar texto del correo</button>` : ""}
     <h3>Disponibilidad para esta solicitud</h3>
     <div id="d-det"></div>
     <div class="notas">
@@ -282,6 +282,7 @@ $('#detalle').onclick = e => {
   if (boton) return cambiar({ estado: boton.dataset.estado }, 'Estado actualizado.');
   if (e.target.id === 'guardar-notas') return cambiar({ notas: $('#notas').value }, 'Notas guardadas.');
   if (e.target.id === 'eliminar') return eliminar();
+  if (e.target.id === 'copiar-correo') return copiarCorreo();
 };
 
 // Cambia el estado o las notas de la solicitud seleccionada
@@ -297,8 +298,8 @@ async function cambiar(cambios, aviso) {
   }
 }
 
-// Arma un correo ya escrito con los datos de la reserva (se abre en la app de correo del administrador)
-function correoCliente(r) {
+// Texto del correo con los datos de la reserva
+function textoCorreo(r) {
   const confirmada = r.estado === 'confirmada';
   const asunto = confirmada ? `Reserva confirmada ${r.codigo}` : `Cotización ${r.codigo}`;
   const cuerpo = [
@@ -316,6 +317,12 @@ function correoCliente(r) {
     '',
     "Mery's Catering"
   ].join('\n');
+  return { asunto, cuerpo };
+}
+
+// Enlace que abre el correo en la aplicación del administrador
+function correoCliente(r) {
+  const { asunto, cuerpo } = textoCorreo(r);
   return `mailto:${r.correo}?subject=${encodeURIComponent(asunto)}&body=${encodeURIComponent(cuerpo)}`;
 }
 
@@ -406,7 +413,27 @@ async function eliminar() {
   }
 }
 
+// Copia el asunto y el texto del correo para pegarlo en cualquier aplicación
+async function copiarCorreo() {
+  const r = datos.find(x => x.id === seleccionado);
+  if (!r) return;
+  const { asunto, cuerpo } = textoCorreo(r);
+  const texto = `Asunto: ${asunto}\n\n${cuerpo}`;
+  try {
+    await navigator.clipboard.writeText(texto);
+  } catch {
+    // Respaldo para navegadores que no permiten usar el portapapeles directamente
+    const area = Object.assign(document.createElement('textarea'), { value: texto });
+    document.body.appendChild(area);
+    area.select();
+    document.execCommand('copy');
+    area.remove();
+  }
+  avisar('Texto copiado. Pégalo en tu correo o WhatsApp.');
+}
+
 if (sesion) iniciar();
 </script>
 </body>
 </html>
+
