@@ -284,7 +284,7 @@ $('#detalle').onclick = e => {
 
 // Notificación por correo al cliente (función notificar-estado en Supabase)
 async function notificar(id) {
-  const r = await fetch(`${CONFIG.supabaseUrl}/functions/v1/notificar-estado`, {
+  const r = await fetch(`${CONFIG.supabaseUrl}/functions/v1/clever-service`, {
     method: 'POST',
     headers: { apikey: CONFIG.supabaseKey, Authorization: `Bearer ${sesion.token}`, 'Content-Type': 'application/json' },
     body: JSON.stringify({ id })
