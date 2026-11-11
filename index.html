@@ -150,7 +150,7 @@ dialog::backdrop{background:rgba(11,22,40,.7)}
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
 }
-@media(max-width:560px){.servicios .servicio{flex-basis:100%}#form .checks{grid-template-columns:1fr}}
+@media(max-width:560px){.servicios .servicio{flex-basis:100%}#form .checks{grid-template-columns:1fr}.dots{gap:.35rem}.dots button{width:9px;height:9px}}
 </style>
 </head>
 <body>
@@ -235,31 +235,10 @@ dialog::backdrop{background:rgba(11,22,40,.7)}
   <h2 class="title">Galería de nuestros eventos</h2>
   <p class="sub">Celebraciones realizadas con nuestros clientes.</p>
   <div class="carrusel">
-    <div class="slides" id="slides">
-      <figure class="foto" role="img" aria-label="Decoración de cumpleaños" style="background-image:url('img/galeria-1.jpg')"><span>Feliz Cumpleaños</span></figure>
-      <figure class="foto" role="img" aria-label="Celebración al aire libre" style="background-image:url('img/galeria-2.jpg')"><span>Celebración al aire libre</span></figure>
-      <figure class="foto" role="img" aria-label="Mesa de pasadía con globos" style="background-image:url('img/galeria-3.jpg')"><span>Mi Pasadita</span></figure>
-      <figure class="foto" role="img" aria-label="Carpa iluminada" style="background-image:url('img/galeria-4.jpg')"><span>Carpa iluminada</span></figure>
-      <figure class="foto" role="img" aria-label="Galería 5" style="background-image:url('img/galeria-5.jpg')"><span>Galería 5</span></figure>
-      <figure class="foto" role="img" aria-label="Galería 6" style="background-image:url('img/galeria-6.jpg')"><span>Galería 6</span></figure>
-      <figure class="foto" role="img" aria-label="Galería 7" style="background-image:url('img/galeria-7.jpg')"><span>Galería 7</span></figure>
-      <figure class="foto" role="img" aria-label="Galería 8" style="background-image:url('img/galeria-8.jpg')"><span>Galería 8</span></figure>
-      <figure class="foto" role="img" aria-label="Galería 9" style="background-image:url('img/galeria-9.jpg')"><span>Galería 9</span></figure>
-      <figure class="foto" role="img" aria-label="Galería 10" style="background-image:url('img/galeria-10.jpg')"><span>Galería 10</span></figure>
-      <figure class="foto" role="img" aria-label="Galería 11" style="background-image:url('img/galeria-11.jpg')"><span>Galería 11</span></figure>
-      <figure class="foto" role="img" aria-label="Galería 12" style="background-image:url('img/galeria-12.jpg')"><span>Galería 12</span></figure>
-      <figure class="foto" role="img" aria-label="Galería 13" style="background-image:url('img/galeria-13.jpg')"><span>Galería 13</span></figure>
-      <figure class="foto" role="img" aria-label="Galería 14" style="background-image:url('img/galeria-14.jpg')"><span>Galería 14</span></figure>
-      <figure class="foto" role="img" aria-label="Galería 15" style="background-image:url('img/galeria-15.jpg')"><span>Galería 15</span></figure>
-    </div>
+    <div class="slides" id="slides"></div>
     <button class="arrow prev" id="gal-prev" aria-label="Anterior">‹</button>
     <button class="arrow next" id="gal-next" aria-label="Siguiente">›</button>
-    <div class="dots" id="gal-dots">
-      <button class="on" aria-label="Foto 1"></button>
-      <button aria-label="Foto 2"></button>
-      <button aria-label="Foto 3"></button>
-      <button aria-label="Foto 4"></button>
-    </div>
+    <div class="dots" id="gal-dots"></div>
   </div>
 </section>
 
@@ -392,8 +371,28 @@ $('#hero-next').onclick = () => { irSlide(h + 1); autoHero(); };
 hdots.forEach((d, k) => d.onclick = () => { irSlide(k); autoHero(); });
 autoHero();
 
-// Galería
-const slidesEl = $('#slides'), fotos = $$('.foto'), gdots = $$('#gal-dots button');
+// Galería: cada línea es una foto. Para agregar otra, copia una línea y cambia el nombre del archivo.
+const GALERIA = [
+  { img: 'galeria-1.jpg', titulo: 'Feliz Cumpleaños' },
+  { img: 'galeria-2.jpg', titulo: 'Celebración al aire libre' },
+  { img: 'galeria-3.jpg', titulo: 'Mi Pasadita' },
+  { img: 'galeria-4.jpg', titulo: 'Carpa iluminada' },
+  { img: 'galeria-5.jpg', titulo: 'Galería 5' },
+  { img: 'galeria-6.jpg', titulo: 'Galería 6' },
+  { img: 'galeria-7.jpg', titulo: 'Galería 7' },
+  { img: 'galeria-8.jpg', titulo: 'Galería 8' },
+  { img: 'galeria-9.jpg', titulo: 'Galería 9' },
+  { img: 'galeria-10.jpg', titulo: 'Galería 10' },
+  { img: 'galeria-11.jpg', titulo: 'Galería 11' },
+  { img: 'galeria-12.jpg', titulo: 'Galería 12' },
+  { img: 'galeria-13.jpg', titulo: 'Galería 13' },
+  { img: 'galeria-14.jpg', titulo: 'Galería 14' },
+  { img: 'galeria-15.jpg', titulo: 'Galería 15' },
+];
+const slidesEl = $('#slides'), gdotsEl = $('#gal-dots');
+slidesEl.innerHTML = GALERIA.map(f => `<figure class="foto" role="img" aria-label="${f.titulo}" style="background-image:url('img/${f.img}')"><span>${f.titulo}</span></figure>`).join('');
+gdotsEl.innerHTML = GALERIA.map((f, k) => `<button class="${k === 0 ? 'on' : ''}" aria-label="Foto ${k + 1}"></button>`).join('');
+const fotos = $$('.foto'), gdots = $$('#gal-dots button');
 let g = 0, gTimer;
 function irFoto(n) {
   g = (n + fotos.length) % fotos.length;
