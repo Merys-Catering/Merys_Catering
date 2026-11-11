@@ -376,20 +376,20 @@ autoHero();
 // Galería: cada línea es una foto. Para agregar otra, copia una línea y cambia el nombre del archivo.
 const GALERIA = [
   { img: 'galeria-1.jpg', titulo: 'Feliz Cumpleaños' },
-  { img: 'galeria-2.jpg', titulo: 'Celebración al aire libre' },
+  { img: 'galeria-2.jpg', titulo: 'Pasa Bocas' },
   { img: 'galeria-3.jpg', titulo: 'Mi Pasadita' },
   { img: 'galeria-4.jpg', titulo: 'Carpa iluminada' },
-  { img: 'galeria-5.jpg', titulo: 'Galería 5' },
+  { img: 'galeria-5.jpg', titulo: 'Estación completa' },
   { img: 'galeria-6.jpg', titulo: 'Galería 6' },
-  { img: 'galeria-7.jpg', titulo: 'Galería 7' },
-  { img: 'galeria-8.jpg', titulo: 'Galería 8' },
+  { img: 'galeria-7.jpg', titulo: 'bowl almuerzos' },
+  { img: 'galeria-8.jpg', titulo: 'bowl almuerzos' },
   { img: 'galeria-9.jpg', titulo: 'Galería 9' },
-  { img: 'galeria-10.jpg', titulo: 'Galería 10' },
-  { img: 'galeria-11.jpg', titulo: 'Galería 11' },
+  { img: 'galeria-10.jpg', titulo: 'Grados' },
+  { img: 'galeria-11.jpg', titulo: 'Coffee Break' },
   { img: 'galeria-12.jpg', titulo: 'Galería 12' },
-  { img: 'galeria-13.jpg', titulo: 'Galería 13' },
-  { img: 'galeria-14.jpg', titulo: 'Galería 14' },
-  { img: 'galeria-15.jpg', titulo: 'Galería 15' },
+  { img: 'galeria-13.jpg', titulo: 'Grados' },
+  { img: 'galeria-14.jpg', titulo: 'Almuerzos empresariales' },
+  { img: 'galeria-15.jpg', titulo: 'Almuerzos empresariales' },
 ];
 const slidesEl = $('#slides'), gdotsEl = $('#gal-dots');
 slidesEl.innerHTML = GALERIA.map(f => `<figure class="foto" style="background-image:url('img/${f.img}')"><img src="img/${f.img}" alt="${f.titulo}"><span>${f.titulo}</span></figure>`).join('');
