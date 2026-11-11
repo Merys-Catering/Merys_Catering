@@ -55,6 +55,7 @@ h3{font-size:.9rem;margin:1rem 0 .45rem}
 .estados button{background:#fff;border:2px solid var(--c);color:var(--c);border-radius:999px;padding:.3rem .8rem;font-weight:800;text-transform:capitalize}
 .estados button.activo{background:var(--c);color:#fff}
 .fila{display:flex;flex-wrap:wrap;gap:.6rem;align-items:flex-end}
+.correo{display:inline-block;margin-top:.8rem;text-decoration:none}
 .fila label{flex:1;min-width:130px}
 .disp{border-radius:10px;padding:.7rem .9rem;margin:.9rem 0 .5rem;font-weight:800}
 .ok{background:#e6f5ec;color:#1e6b3c}
@@ -264,6 +265,7 @@ function pintarDetalle() {
     </dl>
     <h3>Estado</h3>
     <div class="estados">${ESTADOS.map(e => `<button class="e-${e}${e === r.estado ? ' activo' : ''}" data-estado="${e}">${e}</button>`).join('')}</div>
+    ${["cotizada", "confirmada"].includes(r.estado) ? `<a class="btn alt correo" href="${esc(correoCliente(r))}">Redactar correo al cliente</a>` : ""}
     <h3>Disponibilidad para esta solicitud</h3>
     <div id="d-det"></div>
     <div class="notas">
@@ -282,34 +284,39 @@ $('#detalle').onclick = e => {
   if (e.target.id === 'eliminar') return eliminar();
 };
 
-// Notificación por correo al cliente (función notificar-estado en Supabase)
-async function notificar(id) {
-  const r = await fetch(`${CONFIG.supabaseUrl}/functions/v1/clever-service`, {
-    method: 'POST',
-    headers: { apikey: CONFIG.supabaseKey, Authorization: `Bearer ${sesion.token}`, 'Content-Type': 'application/json' },
-    body: JSON.stringify({ id })
-  });
-  const j = await r.json().catch(() => ({}));
-  if (!r.ok || j.enviado === false) throw new Error(j.error || j.motivo || `código ${r.status}`);
-}
-
+// Cambia el estado o las notas de la solicitud seleccionada
 async function cambiar(cambios, aviso) {
-  const previo = datos.find(x => x.id === seleccionado)?.estado;
   try {
     await api(`/rest/v1/reservas?id=eq.${seleccionado}`, { method: 'PATCH', body: JSON.stringify(cambios) });
-    // Solo avisa al cliente cuando el estado cambia a cotizada o confirmada
-    const nuevo = cambios.estado;
-    const debeNotificar = nuevo && nuevo !== previo && ['cotizada', 'confirmada'].includes(nuevo);
-    let extra = '', fallo = false;
-    if (debeNotificar) {
-      try { await notificar(seleccionado); extra = ' Correo enviado al cliente.'; }
-      catch (e) { extra = ` Pero no se pudo enviar el correo: ${e.message}`; fallo = true; }
-    }
     await cargar();
-    avisar(aviso + extra, fallo);
+    const avisoCorreo = cambios.estado && ['cotizada', 'confirmada'].includes(cambios.estado)
+      ? ' Usa "Redactar correo al cliente" para avisarle.' : '';
+    avisar(aviso + avisoCorreo);
   } catch (err) {
     avisar(err.message, true);
   }
+}
+
+// Arma un correo ya escrito con los datos de la reserva (se abre en la app de correo del administrador)
+function correoCliente(r) {
+  const confirmada = r.estado === 'confirmada';
+  const asunto = confirmada ? `Reserva confirmada ${r.codigo}` : `Cotización ${r.codigo}`;
+  const cuerpo = [
+    `Hola ${r.nombre}:`,
+    '',
+    confirmada
+      ? 'Tu reserva quedó confirmada. Tu fecha está reservada y pronto nos comunicaremos contigo para los detalles finales.'
+      : 'Ya revisamos tu solicitud y tu cotización está lista. Si tienes preguntas, escríbenos por WhatsApp.',
+    '',
+    `Código: ${r.codigo}`,
+    `Tipo de evento: ${r.tipo}`,
+    `Fecha: ${r.fecha}`,
+    `Personas: ${r.invitados}`,
+    `Servicios: ${r.servicios || 'Por definir'}`,
+    '',
+    "Mery's Catering"
+  ].join('\n');
+  return `mailto:${r.correo}?subject=${encodeURIComponent(asunto)}&body=${encodeURIComponent(cuerpo)}`;
 }
 
 // Disponibilidad: fecha y cantidad de personas
@@ -403,5 +410,3 @@ if (sesion) iniciar();
 </script>
 </body>
 </html>
-
-
