@@ -282,15 +282,33 @@ $('#detalle').onclick = e => {
   if (e.target.id === 'eliminar') return eliminar();
 };
 
+// Notificación por correo al cliente (función notificar-estado en Supabase)
+async function notificar(id) {
+  const r = await fetch(`${CONFIG.supabaseUrl}/functions/v1/notificar-estado`, {
+    method: 'POST',
+    headers: { apikey: CONFIG.supabaseKey, Authorization: `Bearer ${sesion.token}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ id })
+  });
+  const j = await r.json().catch(() => ({}));
+  if (!r.ok || j.enviado === false) throw new Error(j.error || j.motivo || `código ${r.status}`);
+}
+
 async function cambiar(cambios, aviso) {
+  const previo = datos.find(x => x.id === seleccionado)?.estado;
   try {
     await api(`/rest/v1/reservas?id=eq.${seleccionado}`, { method: 'PATCH', body: JSON.stringify(cambios) });
+    // Solo avisa al cliente cuando el estado cambia a cotizada o confirmada
+    const nuevo = cambios.estado;
+    const debeNotificar = nuevo && nuevo !== previo && ['cotizada', 'confirmada'].includes(nuevo);
+    let extra = '', fallo = false;
+    if (debeNotificar) {
+      try { await notificar(seleccionado); extra = ' Correo enviado al cliente.'; }
+      catch (e) { extra = ` Pero no se pudo enviar el correo: ${e.message}`; fallo = true; }
+    }
     await cargar();
-    const m = $('#det-msg');
-    if (m) m.textContent = aviso;
+    avisar(aviso + extra, fallo);
   } catch (err) {
-    const m = $('#det-msg');
-    if (m) m.textContent = err.message;
+    avisar(err.message, true);
   }
 }
 
@@ -385,4 +403,5 @@ if (sesion) iniciar();
 </script>
 </body>
 </html>
+
 
