@@ -81,10 +81,12 @@ header nav.open{background:var(--navy)}
 
 /* Galería */
 #galeria{background:var(--mist)}
-.carrusel{position:relative;max-width:1150px;height:clamp(240px,38vw,400px);margin:2.4rem auto 0;border-radius:16px;overflow:hidden;background:var(--navy-2)}
+.carrusel{position:relative;max-width:1150px;height:clamp(260px,40vw,460px);margin:2.4rem auto 0;border-radius:16px;overflow:hidden;background:var(--navy-2)}
 .slides{display:flex;height:100%;transition:transform .6s ease}
-.foto{flex:0 0 100%;height:100%;margin:0;position:relative;background:var(--navy-2) center/cover no-repeat}
-.foto span{position:absolute;left:1.2rem;bottom:1.2rem;padding:.4rem .9rem;border-radius:8px;background:rgba(11,22,40,.85);color:#fff;font-weight:800;font-size:1.1rem}
+.foto{flex:0 0 100%;height:100%;margin:0;position:relative;overflow:hidden;background:var(--navy-2) center/cover no-repeat}
+.foto::before{content:"";position:absolute;inset:-30px;background:inherit;filter:blur(20px) brightness(.6)}
+.foto img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;z-index:1}
+.foto span{z-index:2;position:absolute;left:1.2rem;bottom:1.2rem;padding:.4rem .9rem;border-radius:8px;background:rgba(11,22,40,.85);color:#fff;font-weight:800;font-size:1.1rem}
 .carrusel .arrow{width:44px;height:44px;border:0;background:rgba(11,22,40,.8);font-size:1.6rem}
 .dots{position:absolute;bottom:1.1rem;left:50%;transform:translateX(-50%);display:flex;gap:.55rem;z-index:2}
 .dots button{width:12px;height:12px;border-radius:50%;border:2px solid #fff;background:transparent;padding:0;cursor:pointer}
@@ -339,7 +341,7 @@ dialog::backdrop{background:rgba(11,22,40,.7)}
 const CONFIG = {
   whatsapp: '573184896105',        // número con indicativo de país, sin + ni espacios
   telefono: '+57 318 489 6105',
-  correo: 'meryscateringoficial@gmail.com',
+  correo: 'helpdesk.col@outlook.com',
   // Opcional: base de datos Supabase. Si quedan vacíos, la reserva se envía por WhatsApp.
   supabaseUrl: 'https://vlrhydgsjholcngvpybm.supabase.co',
   supabaseKey: 'sb_publishable_kSMPT9LRQIfTvT_eeRdrrw_Y1haBcqN'
@@ -390,7 +392,7 @@ const GALERIA = [
   { img: 'galeria-15.jpg', titulo: 'Galería 15' },
 ];
 const slidesEl = $('#slides'), gdotsEl = $('#gal-dots');
-slidesEl.innerHTML = GALERIA.map(f => `<figure class="foto" role="img" aria-label="${f.titulo}" style="background-image:url('img/${f.img}')"><span>${f.titulo}</span></figure>`).join('');
+slidesEl.innerHTML = GALERIA.map(f => `<figure class="foto" style="background-image:url('img/${f.img}')"><img src="img/${f.img}" alt="${f.titulo}"><span>${f.titulo}</span></figure>`).join('');
 gdotsEl.innerHTML = GALERIA.map((f, k) => `<button class="${k === 0 ? 'on' : ''}" aria-label="Foto ${k + 1}"></button>`).join('');
 const fotos = $$('.foto'), gdots = $$('#gal-dots button');
 let g = 0, gTimer;
